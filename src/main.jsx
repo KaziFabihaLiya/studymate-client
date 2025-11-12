@@ -12,6 +12,9 @@ import ForgotPassword from './component/ForgetPassword.jsx';
 import AuthProvider from './Auth/AuthProvider.jsx';
 import ErrorPage from './component/ErrorPage.jsx';
 import Homepage from './layout/Homepage.jsx';
+import PartnerProfiles from './component/PartnerProfiles.jsx';
+import ProfileDetails from './component/ProfileDetails.jsx';
+import CreateProfile from './component/CreateProfile.jsx';
 
 
 const router = createBrowserRouter([
@@ -21,7 +24,6 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: "/",
         element: <Homepage />,
       },
       {
@@ -34,7 +36,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/forgot-password",
-        Component: ForgotPassword,
+        element: <ForgotPassword/>,
+      },
+      {
+        path: "/AllPartnerProfile",
+        loader: () => fetch("http://localhost:5000/AllPartnerProfile"),
+        element: <PartnerProfiles/>,
+      },
+      {
+        path: "/createProfile",
+        element: <CreateProfile/>,
+      },
+      {
+        path: "/profileDetails/:id",
+        loader: ({ params }) => fetch(`http://localhost:5000/profileDetails/${params.id}`),
+        element: <ProfileDetails/>,
       },
       {
         path: "*",
@@ -47,7 +63,7 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />,
+      <RouterProvider router={router} />
     </AuthProvider>
   </StrictMode>
 );

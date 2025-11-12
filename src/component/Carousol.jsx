@@ -2,55 +2,35 @@ import React from 'react';
 
 const Carousol = () => {
     return (
-      <div className="carousel rounded-box w-64">
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
-        </div>
-        <div className="carousel-item w-full">
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
-            className="w-full"
-            alt="Tailwind CSS Carousel component"
-          />
+      <div className="relative mt-30 mx-20">
+        <div className="carousel w-full h-[80vh] rounded-2xl overflow-hidden shadow-lg">
+          <div className="carousel-item w-full">
+            <video
+              className="w-full h-full object-cover"
+              src="/Caro1.mp4"
+              autoPlay
+              loop
+              muted
+            />
+          </div>
+          <div className="carousel-item w-full">
+            <video
+              className="w-full h-full object-cover"
+              src="/Caro2.mp4"
+              autoPlay
+              loop
+              muted
+            />
+          </div>
+          <div className="carousel-item w-full">
+            <video
+              className="w-full h-full object-cover"
+              src="/Caro3.mp4"
+              autoPlay
+              loop
+              muted
+            />
+          </div>
         </div>
       </div>
     );

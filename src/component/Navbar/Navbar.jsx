@@ -52,13 +52,13 @@ const Navbar = () => {
   const navLinks = user
     ? [
         { to: "/", label: "Home" },
-        { to: "/find-partners", label: "Find Partners" },
-        { to: "/create-profile", label: "Create Partner Profile" },
+        { to: "/AllPartnerProfile", label: "Find Partners" },
+        { to: "/createProfile", label: "Create Partner Profile" },
         { to: "/my-connections", label: "My Connections" },
       ]
     : [
         { to: "/", label: "Home" },
-        { to: "/find-partners", label: "Find Partners" },
+        { to: "/AllPartnerProfile", label: "Find Partners" },
       ];
 
   return (
