@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import Home from './layout/Home.jsx';
-
+import "./Routes/PrivateRoute.jsx"
 import Login from './component/Login.jsx';
 import Register from './component/Register.jsx';
 import ForgotPassword from './component/ForgetPassword.jsx';
@@ -15,6 +15,10 @@ import Homepage from './layout/Homepage.jsx';
 import PartnerProfiles from './component/PartnerProfiles.jsx';
 import ProfileDetails from './component/ProfileDetails.jsx';
 import CreateProfile from './component/CreateProfile.jsx';
+import ExtraSections from './component/ExtraSections.jsx';
+import MyConnections from './component/MyConnections.jsx';
+import PrivateRoutes from './Routes/PrivateRoute.jsx';
+import PrivateRoute from './Routes/PrivateRoute.jsx';
 
 
 const router = createBrowserRouter([
@@ -25,6 +29,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />,
+        loader: () => fetch("http://localhost:5000/top-rated"),
       },
       {
         path: "/login",
@@ -36,21 +41,43 @@ const router = createBrowserRouter([
       },
       {
         path: "/forgot-password",
-        element: <ForgotPassword/>,
+        element: <ForgotPassword />,
       },
       {
         path: "/AllPartnerProfile",
         loader: () => fetch("http://localhost:5000/AllPartnerProfile"),
-        element: <PartnerProfiles/>,
+        element: <PartnerProfiles />,
       },
       {
         path: "/createProfile",
-        element: <CreateProfile/>,
+        element: (
+          <PrivateRoute>
+            <CreateProfile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/testimonials",
+        loader: () => fetch("http://localhost:5000/testimonials"),
+        element: <ExtraSections />,
+      },
+      {
+        path: "/my-profiles",
+        element: (
+          <PrivateRoute>
+            <MyConnections />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profileDetails/:id",
-        loader: ({ params }) => fetch(`http://localhost:5000/profileDetails/${params.id}`),
-        element: <ProfileDetails/>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/profileDetails/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <ProfileDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "*",

@@ -8,9 +8,10 @@ const PartnerCard = ({ partner }) => {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleViewProfile = () => {
-    navigate(`/profileDetails/${partner._id}`);
-  };
+const handleViewProfile = () => {
+  console.log("Navigating to ID:", partner._id); // Verify ID here
+  navigate(`/profileDetails/${partner._id}`);
+};
   const getExperienceProgress = (level) => {
     switch (level.toLowerCase()) {
       case "beginner":
@@ -62,16 +63,16 @@ const PartnerCard = ({ partner }) => {
       </figure>
 
       {/* Card Body */}
-      <div className="card-body p-6 text-center relative z-10">
-        {/* Name with Subtle Animation */}
-        <h2 className="card-title text-2xl font-bold text-gray-800 mb-3 transition-transform duration-300 text-center group-hover:scale-110 group-hover:text-gray-900">
+      <div className="card-body p-6 relative z-10">
+        {/* Name with Subtle Animation - Centered */}
+        <h2 className="card-title text-2xl font-bold text-gray-800 mb-3 transition-transform duration-300 text-center group-hover:scale-110 group-hover:text-gray-900 mx-auto">
           {partner.name}
         </h2>
 
-        {/* Subject with Icon */}
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <BookOpen size={18} className="text-gray-600" />
-          <p className="text-sm text-gray-700 font-medium">
+        {/* Subject with Icon - Left-aligned */}
+        <div className="flex items-center justify-start gap-2 mb-3 pl-2">
+          <BookOpen size={18} className="text-gray-600 flex-shrink-0" />
+          <p className="text-sm text-gray-700 font-medium text-left">
             Subject:{" "}
             <span className="text-gray-900 font-semibold">
               {partner.subject}
@@ -79,10 +80,10 @@ const PartnerCard = ({ partner }) => {
           </p>
         </div>
 
-        {/* Study Mode with Icon */}
-        <div className="flex items-center justify-center gap-2 mb-3">
-          <Clock size={18} className="text-gray-600" />
-          <p className="text-sm text-gray-700 font-medium">
+        {/* Study Mode with Icon - Left-aligned */}
+        <div className="flex items-center justify-start gap-2 mb-3 pl-2">
+          <Clock size={18} className="text-gray-600 flex-shrink-0" />
+          <p className="text-sm text-gray-700 font-medium text-left">
             Mode:{" "}
             <span className="text-gray-900 font-semibold">
               {partner.studyMode}
@@ -90,21 +91,21 @@ const PartnerCard = ({ partner }) => {
           </p>
         </div>
 
-        {/* Experience Level with Progress Bar and Icon */}
-        <div className="mb-4">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Star size={18} className="text-gray-600" />
-            <p className="text-sm text-gray-700 font-medium">
+        {/* Experience Level with Progress Bar and Icon - Left-aligned */}
+        <div className="mb-4 pl-2">
+          <div className="flex items-center justify-start gap-2 mb-2">
+            <Star size={18} className="text-gray-600 flex-shrink-0" />
+            <p className="text-sm text-gray-700 font-medium text-left">
               Level:{" "}
               <span className="text-gray-900 font-semibold">
                 {partner.experienceLevel}
               </span>
             </p>
           </div>
-          {/* Animated Progress Bar */}
+          {/* Animated Progress Bar - Full width, so it spans the card */}
           <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-gray-600 to-black h-full transition-all duration-700 ease-out"
+              className="bg-gradient-to-r from-gray-600 to-black h-fulltransition-all duration-700 ease-out"
               style={{
                 width: `${getExperienceProgress(partner.experienceLevel)}%`,
               }}
@@ -112,7 +113,7 @@ const PartnerCard = ({ partner }) => {
           </div>
         </div>
 
-        {/* View Profile Button with Ripple Effect */}
+        {/* View Profile Button with Ripple Effect - Centered */}
         <div className="card-actions justify-center">
           <button
             className="relative btn bg-gradient-to-r from-gray-600 to-black text-white hover:from-gray-700 hover:to-gray-900 transition-all duration-300 hover:shadow-lg hover:shadow-gray-500/50 hover:scale-110 rounded-lg px-6 py-3 flex items-center gap-2 overflow-hidden"

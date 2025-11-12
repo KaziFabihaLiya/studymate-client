@@ -54,7 +54,7 @@ const Navbar = () => {
         { to: "/", label: "Home" },
         { to: "/AllPartnerProfile", label: "Find Partners" },
         { to: "/createProfile", label: "Create Partner Profile" },
-        { to: "/my-connections", label: "My Connections" },
+        { to: "/my-profiles", label: "My Connections" },
       ]
     : [
         { to: "/", label: "Home" },

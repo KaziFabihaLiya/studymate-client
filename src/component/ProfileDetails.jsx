@@ -1,13 +1,13 @@
-import React, { useState, useEffect, use } from 'react';
-import { 
-  Star, 
-  MapPin, 
-  Clock, 
-  BookOpen, 
-  Award, 
-  Users, 
-  Mail, 
-  Video, 
+import React, { useState, useEffect, useContext } from "react";
+import {
+  Star,
+  MapPin,
+  Clock,
+  BookOpen,
+  Award,
+  Users,
+  Mail,
+  Video,
   Calendar,
   TrendingUp,
   MessageCircle,
@@ -17,69 +17,29 @@ import {
   CheckCircle,
   Zap,
   Target,
-  Globe
-} from 'lucide-react';
-import { useLoaderData, useNavigate, useParams } from 'react-router';
-import { AuthContext } from '../Auth/AuthContext';
+  Globe,
+} from "lucide-react";
+import { useLoaderData, useNavigate, useParams } from "react-router";
+import { AuthContext } from "../Auth/AuthContext";
 
 const ProfileDetails = () => {
-
-  const [partner, setPartner] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Check auth status
   const [isFavorited, setIsFavorited] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-    const navigate = useNavigate();
-    const { id } = useParams();
-    const data = useLoaderData();
-    const { user } = use(AuthContext);
-    const [refetch, setRefecth] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const data = useLoaderData();
+  const { user } = useContext(AuthContext);
 
-useEffect(() => {
-  const fetchPartnerDetails = async () => {
-    try {
-      const res = await fetch(`http://localhost:3000/profileDetails/${id}`);
-      const data = await res.json();
-
-      if (data && data.result) {
-        setPartner(data.result);
-      } else {
-        setPartner(null);
-      }
-
-      setLoading(false);
-      console.log("✅ Profile fetched:", data.result);
-    } catch (err) {
-      console.error("❌ Error fetching partner:", err);
-      setLoading(false);
-    }
-  };
-
-  // Run only once when the component mounts
-  fetchPartnerDetails();
-  setIsVisible(true);
-}, [id]);
-
+  const partner = data?.result;
 
   useEffect(() => {
-    // Check if user is logged in
-    const checkAuth = () => {
-      // Replace with your actual auth check
-      const userLoggedIn = true; // Check localStorage, context, etc.
-      if (!userLoggedIn) {
-        window.location.href = '/login';
-        return;
-      }
-      setIsLoggedIn(userLoggedIn);
-    };
-
-    checkAuth();
-  }, []);
-
-  const fetchPartnerDetails = async () => {
-
-  };
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    setIsVisible(true);
+  }, [user, navigate]);
 
   const handleBookSession = () => {
     setShowBooking(true);
@@ -87,7 +47,7 @@ useEffect(() => {
 
   const handleSendMessage = () => {
     // Implement messaging functionality
-    alert('Message feature coming soon!');
+    alert("Message feature coming soon!");
   };
 
   const handleFavorite = () => {
@@ -103,7 +63,7 @@ useEffect(() => {
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
-      alert('Profile link copied to clipboard!');
+      alert("Profile link copied to clipboard!");
     }
   };
 
@@ -119,9 +79,9 @@ useEffect(() => {
             key={i}
             size={20}
             className={`transition-all duration-300 ${
-              i < Math.floor(rating) 
-                ? 'fill-yellow-400 text-yellow-400' 
-                : 'text-gray-300'
+              i < Math.floor(rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "text-gray-300"
             }`}
           />
         ))}
@@ -132,24 +92,17 @@ useEffect(() => {
     );
   };
 
-  if (loading) {
+  if (!data?.success || !partner) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-20 h-20 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600 text-lg">Loading profile...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!partner) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
+      <div className="min-h-screen mt-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
         <div className="text-center">
           <BookOpen size={64} className="mx-auto mb-4 text-gray-400" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Profile Not Found</h2>
-          <p className="text-gray-600 mb-6">The study partner profile you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Profile Not Found
+          </h2>
+          <p className="text-gray-600 mb-6">
+            The study partner profile you're looking for doesn't exist.
+          </p>
           <button
             onClick={handleBack}
             className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
@@ -162,55 +115,61 @@ useEffect(() => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-pulse"></div>
-      </div>
+    <div className="min-h-screen mt-40 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    {/* Animated Background */}
+    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
+      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float-delayed"></div>
+      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-pulse"></div>
+    </div>
 
-      {/* Navigation Bar */}
-      <div className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={handleBack}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
-            >
-              <ChevronLeft size={24} className="group-hover:-translate-x-1 transition-transform" />
-              <span className="font-semibold">Back to Partners</span>
-            </button>
-            <div className="flex items-center gap-3">
-              <button
-                onClick={handleFavorite}
-                className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-                  isFavorited 
-                    ? 'bg-red-100 text-red-600' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-600'
-                }`}
-              >
-                <Heart size={20} className={isFavorited ? 'fill-current' : ''} />
-              </button>
-              <button
-                onClick={handleShare}
-                className="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover:scale-110"
-              >
-                <Share2 size={20} />
-              </button>
-            </div>
-          </div>
+    {/* Glassmorphic Navigation Bar */}
+    <div className="sticky top-0 z-50 mx-auto max-w-5xl mt-6 px-4">
+      <div className="rounded-full bg-white/25 backdrop-blur-xl border border-white/30 shadow-lg px-6 py-3 flex items-center justify-between transition-all duration-300 hover:bg-white/30">
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors group"
+        >
+          <ChevronLeft
+            size={24}
+            className="group-hover:-translate-x-1 transition-transform"
+          />
+          <span className="font-semibold">Back to Partners</span>
+        </button>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleFavorite}
+            className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+              isFavorited
+                ? "bg-red-100/60 text-red-600"
+                : "bg-white/40 text-gray-600 hover:bg-red-50 hover:text-red-600"
+            }`}
+          >
+            <Heart size={20} className={isFavorited ? "fill-current" : ""} />
+          </button>
+
+          <button
+            onClick={handleShare}
+            className="p-3 rounded-full bg-white/40 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover:scale-110"
+          >
+            <Share2 size={20} />
+          </button>
         </div>
       </div>
+    </div>
+
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Column - Profile Card */}
           <div className="lg:col-span-1">
-            <div 
+            <div
               className={`bg-white rounded-3xl shadow-xl overflow-hidden sticky top-24 transition-all duration-1000 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-10"
               }`}
             >
               {/* Profile Image */}
@@ -221,11 +180,13 @@ useEffect(() => {
                   alt={partner.name}
                   className="w-full h-full object-cover"
                 />
-                
+
                 {/* Floating Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center gap-2 shadow-lg animate-bounce-slow">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-semibold text-gray-900">Available</span>
+                  <span className="text-sm font-semibold text-gray-900">
+                    Available
+                  </span>
                 </div>
 
                 {/* Experience Badge */}
@@ -239,8 +200,10 @@ useEffect(() => {
 
               {/* Profile Info */}
               <div className="p-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">{partner.name}</h1>
-                
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  {partner.name}
+                </h1>
+
                 {/* Rating */}
                 <div className="mb-4 pb-4 border-b border-gray-100">
                   <div className="flex items-center justify-between">
@@ -258,8 +221,12 @@ useEffect(() => {
                       <BookOpen size={20} className="text-blue-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 font-medium">Subject</p>
-                      <p className="font-semibold text-gray-900">{partner.subject}</p>
+                      <p className="text-xs text-gray-500 font-medium">
+                        Subject
+                      </p>
+                      <p className="font-semibold text-gray-900">
+                        {partner.subject}
+                      </p>
                     </div>
                   </div>
 
@@ -268,8 +235,12 @@ useEffect(() => {
                       <Video size={20} className="text-purple-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 font-medium">Study Mode</p>
-                      <p className="font-semibold text-gray-900">{partner.studyMode}</p>
+                      <p className="text-xs text-gray-500 font-medium">
+                        Study Mode
+                      </p>
+                      <p className="font-semibold text-gray-900">
+                        {partner.studyMode}
+                      </p>
                     </div>
                   </div>
 
@@ -278,18 +249,12 @@ useEffect(() => {
                       <Clock size={20} className="text-green-600" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500 font-medium">Available</p>
-                      <p className="font-semibold text-gray-900">{partner.availabilityTime}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3 text-gray-600">
-                    <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center">
-                      <MapPin size={20} className="text-orange-600" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-500 font-medium">Location</p>
-                      <p className="font-semibold text-gray-900">{partner.location}</p>
+                      <p className="text-xs text-gray-500 font-medium">
+                        Availability
+                      </p>
+                      <p className="font-semibold text-gray-900">
+                        {partner.availability}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -298,17 +263,16 @@ useEffect(() => {
                 <div className="space-y-3">
                   <button
                     onClick={handleBookSession}
-                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center gap-2 group"
+                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-blue-700 hover:to-purple-700 flex items-center justify-center gap-2"
                   >
-                    <Calendar size={20} className="group-hover:scale-110 transition-transform" />
-                    Book a Session
+                    <Calendar size={20} />
+                    Book Session
                   </button>
-
                   <button
                     onClick={handleSendMessage}
-                    className="w-full py-4 bg-gray-100 text-gray-900 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 group"
+                    className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-green-700 hover:to-teal-700 flex items-center justify-center gap-2"
                   >
-                    <MessageCircle size={20} className="group-hover:scale-110 transition-transform" />
+                    <MessageCircle size={20} />
                     Send Message
                   </button>
                 </div>
@@ -319,9 +283,9 @@ useEffect(() => {
           {/* Right Column - Details */}
           <div className="lg:col-span-2 space-y-6">
             {/* About Section */}
-            <div 
+            <div
               className="bg-white rounded-3xl shadow-lg p-8 transition-all duration-1000 delay-100"
-              style={{ animation: 'fadeInUp 0.8s ease-out 0.2s both' }}
+              style={{ animation: "fadeInUp 0.8s ease-out 0.2s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
@@ -335,19 +299,23 @@ useEffect(() => {
             </div>
 
             {/* Subjects & Skills */}
-            <div 
+            <div
               className="bg-white rounded-3xl shadow-lg p-8 transition-all duration-1000 delay-200"
-              style={{ animation: 'fadeInUp 0.8s ease-out 0.3s both' }}
+              style={{ animation: "fadeInUp 0.8s ease-out 0.3s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
                   <BookOpen size={24} className="text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Subjects & Expertise</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Subjects & Expertise
+                </h2>
               </div>
 
               <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Subjects</h3>
+                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">
+                  Subjects
+                </h3>
                 <div className="flex flex-wrap gap-3">
                   {partner.subjects.map((subject, index) => (
                     <span
@@ -361,7 +329,9 @@ useEffect(() => {
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">Skills</h3>
+                <h3 className="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">
+                  Skills
+                </h3>
                 <div className="flex flex-wrap gap-3">
                   {partner.skills.map((skill, index) => (
                     <span
@@ -376,9 +346,9 @@ useEffect(() => {
             </div>
 
             {/* Stats Grid */}
-            <div 
+            <div
               className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-1000 delay-300"
-              style={{ animation: 'fadeInUp 0.8s ease-out 0.4s both' }}
+              style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
             >
               <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
@@ -386,7 +356,9 @@ useEffect(() => {
                   <TrendingUp size={24} className="opacity-60" />
                 </div>
                 <p className="text-3xl font-bold mb-1">{partner.successRate}</p>
-                <p className="text-blue-100 text-sm font-medium">Success Rate</p>
+                <p className="text-blue-100 text-sm font-medium">
+                  Success Rate
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
@@ -394,8 +366,12 @@ useEffect(() => {
                   <Clock size={32} className="opacity-80" />
                   <CheckCircle size={24} className="opacity-60" />
                 </div>
-                <p className="text-3xl font-bold mb-1">{partner.responseTime}</p>
-                <p className="text-purple-100 text-sm font-medium">Response Time</p>
+                <p className="text-3xl font-bold mb-1">
+                  {partner.responseTime}
+                </p>
+                <p className="text-purple-100 text-sm font-medium">
+                  Response Time
+                </p>
               </div>
 
               <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
@@ -403,21 +379,27 @@ useEffect(() => {
                   <Users size={32} className="opacity-80" />
                   <Target size={24} className="opacity-60" />
                 </div>
-                <p className="text-3xl font-bold mb-1">{partner.partnerCount}+</p>
-                <p className="text-orange-100 text-sm font-medium">Study Partners</p>
+                <p className="text-3xl font-bold mb-1">
+                  {partner.partnerCount}+
+                </p>
+                <p className="text-orange-100 text-sm font-medium">
+                  Study Partners
+                </p>
               </div>
             </div>
 
             {/* Achievements */}
-            <div 
+            <div
               className="bg-white rounded-3xl shadow-lg p-8 transition-all duration-1000 delay-400"
-              style={{ animation: 'fadeInUp 0.8s ease-out 0.5s both' }}
+              style={{ animation: "fadeInUp 0.8s ease-out 0.5s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
                   <Award size={24} className="text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900">Achievements</h2>
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Achievements
+                </h2>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -426,17 +408,22 @@ useEffect(() => {
                     key={index}
                     className="flex items-center gap-3 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-100 hover:scale-105 transition-transform duration-300"
                   >
-                    <CheckCircle size={24} className="text-green-600 flex-shrink-0" />
-                    <span className="font-semibold text-gray-900 text-sm">{achievement}</span>
+                    <CheckCircle
+                      size={24}
+                      className="text-green-600 flex-shrink-0"
+                    />
+                    <span className="font-semibold text-gray-900 text-sm">
+                      {achievement}
+                    </span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Languages & Contact */}
-            <div 
+            <div
               className="bg-white rounded-3xl shadow-lg p-8 transition-all duration-1000 delay-500"
-              style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}
+              style={{ animation: "fadeInUp 0.8s ease-out 0.6s both" }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
@@ -444,7 +431,9 @@ useEffect(() => {
                     <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
                       <Globe size={20} className="text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">Languages</h3>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      Languages
+                    </h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {partner.languages.map((language, index) => (
@@ -469,7 +458,10 @@ useEffect(() => {
                     href={`mailto:${partner.email}`}
                     className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors group"
                   >
-                    <Mail size={18} className="group-hover:scale-110 transition-transform" />
+                    <Mail
+                      size={18}
+                      className="group-hover:scale-110 transition-transform"
+                    />
                     <span className="font-medium">{partner.email}</span>
                   </a>
                 </div>
@@ -483,11 +475,14 @@ useEffect(() => {
       {showBooking && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-scale-in">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">Book a Session</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              Book a Session
+            </h3>
             <p className="text-gray-600 mb-6">
-              Choose a time that works best for you and {partner.name} will confirm shortly.
+              Choose a time that works best for you and {partner.name} will
+              confirm shortly.
             </p>
-            
+
             <div className="space-y-4 mb-6">
               <input
                 type="date"
@@ -514,7 +509,7 @@ useEffect(() => {
               <button
                 onClick={() => {
                   setShowBooking(false);
-                  alert('Booking request sent!');
+                  alert("Booking request sent!");
                 }}
                 className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
               >
