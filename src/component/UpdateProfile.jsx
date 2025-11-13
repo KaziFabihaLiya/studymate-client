@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { AuthContext } from "../Auth/AuthContext";
 
-
 const UpdateProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -38,7 +37,7 @@ const UpdateProfile = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/profileDetails/${id}`
+          `http://study-mate-server-six.vercel.app/profileDetails/${id}`
         );
         const data = await response.json();
 
@@ -80,7 +79,7 @@ const UpdateProfile = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/updateProfile/${id}`,
+        `http://study-mate-server-six.vercel.app/updateProfile/${id}`,
         {
           method: "PUT",
           headers: {

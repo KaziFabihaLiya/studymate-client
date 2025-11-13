@@ -208,7 +208,7 @@ const { user } = useContext(AuthContext);
         );
       }
 
-      const { data } = await api.post("/createProfile", formData); // Updated: Axios POST
+      const { data } = await api.post("/createProfile", formData); 
 
       if (data.success) {
         toast.success("Profile created successfully! 🎉");

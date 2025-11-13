@@ -15,7 +15,9 @@ const Homepage = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const { data } = await api.get("/testimonials");
+        const { data } = await api.get(
+          "http://study-mate-server-six.vercel.app/testimonials"
+        );
         console.log("Testimonials data:", data);
         setTestimonials(data);
       } catch (err) {

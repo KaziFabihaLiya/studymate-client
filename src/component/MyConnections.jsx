@@ -18,7 +18,9 @@ const MyConnections = () => {
 
       try {
         setLoading(true);
-        const { data } = await api.get(`/my-profiles?email=${user.email}`);
+        const { data } = await api.get(
+          `http://study-mate-server-six.vercel.app/my-profiles?email=${user.email}`
+        );
         setPartners(data);
       } catch (error) {
         console.error("Error fetching profiles:", error);
