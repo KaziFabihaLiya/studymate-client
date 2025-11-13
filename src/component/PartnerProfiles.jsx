@@ -24,7 +24,7 @@ useEffect(() => {
       }
       params.set("sortOrder", sortOrder);
       const response = await api.get(
-        `http://study-mate-server-six.vercel.app/AllPartnerProfile?${params.toString()}`
+        `https://study-mate-server-six.vercel.app/AllPartnerProfile?${params.toString()}`
       );
       setData(response.data);
     } catch (error) {

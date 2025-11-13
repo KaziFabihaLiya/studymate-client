@@ -16,7 +16,7 @@ const Homepage = () => {
     const fetchTestimonials = async () => {
       try {
         const { data } = await api.get(
-          "http://study-mate-server-six.vercel.app/testimonials"
+          "https://study-mate-server-six.vercel.app/testimonials"
         );
         console.log("Testimonials data:", data);
         setTestimonials(data);

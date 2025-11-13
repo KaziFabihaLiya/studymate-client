@@ -37,7 +37,7 @@ const UpdateProfile = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(
-          `http://study-mate-server-six.vercel.app/profileDetails/${id}`
+          `https://study-mate-server-six.vercel.app/profileDetails/${id}`
         );
         const data = await response.json();
 
@@ -79,7 +79,7 @@ const UpdateProfile = () => {
 
     try {
       const response = await fetch(
-        `http://study-mate-server-six.vercel.app/updateProfile/${id}`,
+        `https://study-mate-server-six.vercel.app/updateProfile/${id}`,
         {
           method: "PUT",
           headers: {

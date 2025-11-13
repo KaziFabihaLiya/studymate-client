@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <Homepage />,
         loader: async () => {
           const { data } = await api.get(
-            "http://study-mate-server-six.vercel.app/top-rated"
+            "https://study-mate-server-six.vercel.app/top-rated"
           );
           return data;
         },
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
         path: "/AllPartnerProfile",
         loader: async () => {
           const { data } = await api.get(
-            "http://study-mate-server-six.vercel.app/AllPartnerProfile"
+            "https://study-mate-server-six.vercel.app/AllPartnerProfile"
           );
           return data;
         },
@@ -70,7 +70,7 @@ const router = createBrowserRouter([
         path: "/testimonials",
         loader: async () => {
           const { data } = await api.get(
-            "http://study-mate-server-six.vercel.app/testimonials"
+            "https://study-mate-server-six.vercel.app/testimonials"
           );
           return data;
         },
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
         path: "/profileDetails/:id",
         loader: async ({ params }) => {
           const { data } = await api.get(
-            `http://study-mate-server-six.vercel.app/profileDetails/${params.id}`
+            `https://study-mate-server-six.vercel.app/profileDetails/${params.id}`
           );
           return data;
         },
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
         path: "/update-partner/:id",
         loader: async ({ params }) => {
           const { data } = await api.get(
-            `http://study-mate-server-six.vercel.app/profileDetails/${params.id}`
+            `https://study-mate-server-six.vercel.app/profileDetails/${params.id}`
           );
           return data;
         },

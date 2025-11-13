@@ -19,7 +19,7 @@ const MyConnections = () => {
       try {
         setLoading(true);
         const { data } = await api.get(
-          `http://study-mate-server-six.vercel.app/my-profiles?email=${user.email}`
+          `https://study-mate-server-six.vercel.app/my-profiles?email=${user.email}`
         );
         setPartners(data);
       } catch (error) {
