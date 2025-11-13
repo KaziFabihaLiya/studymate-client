@@ -19,7 +19,7 @@ import {
   Target,
   Globe,
 } from "lucide-react";
-import { useLoaderData, useNavigate, useParams } from "react-router";
+import { useLoaderData, useNavigate} from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 
 const ProfileDetails = () => {
@@ -27,7 +27,6 @@ const ProfileDetails = () => {
   const [showBooking, setShowBooking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  const { id } = useParams();
   const data = useLoaderData();
   const { user } = useContext(AuthContext);
 
@@ -94,7 +93,7 @@ const ProfileDetails = () => {
 
   if (!data?.success || !partner) {
     return (
-      <div className="min-h-screen mt-20 bg-gradient-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
+      <div className="min-h-screen mt-20 bg-linear-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
         <div className="text-center">
           <BookOpen size={64} className="mx-auto mb-4 text-gray-400" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -105,7 +104,7 @@ const ProfileDetails = () => {
           </p>
           <button
             onClick={handleBack}
-            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+            className="px-6 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
           >
             Go Back
           </button>
@@ -115,7 +114,7 @@ const ProfileDetails = () => {
   }
 
   return (
-    <div className="min-h-screen mt-40 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    <div className="min-h-screen mt-40 bg-linear-to-br from-slate-50 via-white to-slate-50">
     {/* Animated Background */}
     <div className="fixed inset-0 overflow-hidden pointer-events-none">
       <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
@@ -173,7 +172,7 @@ const ProfileDetails = () => {
               }`}
             >
               {/* Profile Image */}
-              <div className="relative h-80 bg-gradient-to-br from-blue-500 to-purple-600 overflow-hidden">
+              <div className="relative h-80 bg-linear-to-br from-blue-500 to-purple-600 overflow-hidden">
                 <div className="absolute inset-0 bg-black/20"></div>
                 <img
                   src={partner.profileimage}
@@ -190,7 +189,7 @@ const ProfileDetails = () => {
                 </div>
 
                 {/* Experience Badge */}
-                <div className="absolute bottom-4 left-4 bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-2 rounded-xl shadow-lg">
+                <div className="absolute bottom-4 left-4 bg-linear-to-r from-yellow-400 to-orange-500 px-4 py-2 rounded-xl shadow-lg">
                   <div className="flex items-center gap-2 text-white">
                     <Award size={20} />
                     <span className="font-bold">{partner.experienceLevel}</span>
@@ -263,14 +262,14 @@ const ProfileDetails = () => {
                 <div className="space-y-3">
                   <button
                     onClick={handleBookSession}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-blue-700 hover:to-purple-700 flex items-center justify-center gap-2"
+                    className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-blue-700 hover:to-purple-700 flex items-center justify-center gap-2"
                   >
                     <Calendar size={20} />
                     Book Session
                   </button>
                   <button
                     onClick={handleSendMessage}
-                    className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-green-700 hover:to-teal-700 flex items-center justify-center gap-2"
+                    className="w-full bg-linear-to-r from-green-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-green-700 hover:to-teal-700 flex items-center justify-center gap-2"
                   >
                     <MessageCircle size={20} />
                     Send Message
@@ -288,7 +287,7 @@ const ProfileDetails = () => {
               style={{ animation: "fadeInUp 0.8s ease-out 0.2s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
                   <Users size={24} className="text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">About Me</h2>
@@ -304,7 +303,7 @@ const ProfileDetails = () => {
               style={{ animation: "fadeInUp 0.8s ease-out 0.3s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
                   <BookOpen size={24} className="text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -320,7 +319,7 @@ const ProfileDetails = () => {
                   {partner.subjects.map((subject, index) => (
                     <span
                       key={index}
-                      className="px-5 py-2.5 bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 rounded-xl text-sm font-semibold border border-blue-100 hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      className="px-5 py-2.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-xl text-sm font-semibold border border-blue-100 hover:scale-105 transition-transform duration-300 cursor-pointer"
                     >
                       {subject}
                     </span>
@@ -350,7 +349,7 @@ const ProfileDetails = () => {
               className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-1000 delay-300"
               style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
             >
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Zap size={32} className="opacity-80" />
                   <TrendingUp size={24} className="opacity-60" />
@@ -361,7 +360,7 @@ const ProfileDetails = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Clock size={32} className="opacity-80" />
                   <CheckCircle size={24} className="opacity-60" />
@@ -374,7 +373,7 @@ const ProfileDetails = () => {
                 </p>
               </div>
 
-              <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Users size={32} className="opacity-80" />
                   <Target size={24} className="opacity-60" />
@@ -394,7 +393,7 @@ const ProfileDetails = () => {
               style={{ animation: "fadeInUp 0.8s ease-out 0.5s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-br from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center">
                   <Award size={24} className="text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -406,11 +405,11 @@ const ProfileDetails = () => {
                 {partner.achievements.map((achievement, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-3 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-100 hover:scale-105 transition-transform duration-300"
+                    className="flex items-center gap-3 p-4 bg-linear-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-100 hover:scale-105 transition-transform duration-300"
                   >
                     <CheckCircle
                       size={24}
-                      className="text-green-600 flex-shrink-0"
+                      className="text-green-600 shrink-0"
                     />
                     <span className="font-semibold text-gray-900 text-sm">
                       {achievement}
@@ -428,7 +427,7 @@ const ProfileDetails = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-linear-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
                       <Globe size={20} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">
@@ -449,7 +448,7 @@ const ProfileDetails = () => {
 
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-linear-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center">
                       <Mail size={20} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">Contact</h3>
@@ -511,7 +510,7 @@ const ProfileDetails = () => {
                   setShowBooking(false);
                   alert("Booking request sent!");
                 }}
-                className="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
+                className="flex-1 py-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
               >
                 Confirm
               </button>

@@ -207,12 +207,12 @@ const handleLogin = async (e) => {
   };
 
   return (
-    <section className="relative min-h-screen mx-auto overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <section className="relative min-h-screen mx-auto overflow-hidden bg-linear-to-br from-gray-900 via-black to-gray-800">
       {/* Three.js Canvas Background */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       {/* Overlay gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent pointer-events-none" />
 
       {/* Animated glow orbs */}
       <div className="absolute top-20 left-20 w-96 h-96 bg-gradient-radial from-gray-500/20 to-transparent rounded-full blur-3xl animate-pulse" />
@@ -225,22 +225,22 @@ const handleLogin = async (e) => {
       <div className="relative flex items-center justify-center min-h-screen px-4 py-8">
         <div className="relative group">
           {/* Animated border glow */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-gray-700 via-gray-500 to-gray-600 rounded-3xl blur-lg opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse" />
+          <div className="absolute -inset-1 bg-linear-to-r from-gray-700 via-gray-500 to-gray-600 rounded-3xl blur-lg opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200 animate-pulse" />
 
           {/* Main card */}
-          <div className=" bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-xl shadow-2xl rounded-3xl p-8 max-w-3xl border border-gray-700/50 my-20 px-20">
+          <div className=" bg-linear-to-br from-gray-900/95 to-black/95 backdrop-blur-xl shadow-2xl rounded-3xl p-8 max-w-3xl border border-gray-700/50 my-20 px-20">
             {/* Floating icon */}
             <div className="flex justify-center mb-6">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full blur-xl opacity-50 animate-pulse" />
-                <div className="relative bg-gradient-to-br from-gray-700 to-gray-900 p-4 rounded-full border border-gray-600 shadow-xl hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-linear-to-r from-gray-400 to-gray-600 rounded-full blur-xl opacity-50 animate-pulse" />
+                <div className="relative bg-linear-to-br from-gray-700 to-gray-900 p-4 rounded-full border border-gray-600 shadow-xl hover:scale-110 transition-transform duration-300">
                   <Moon className="w-8 h-8 text-gray-300" />
                 </div>
               </div>
             </div>
 
             <div className="flex items-center justify-center gap-2 mb-2">
-              <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 animate-shimmer">
+              <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-linear-to-r from-gray-200 via-gray-300 to-gray-400 animate-shimmer">
                 Welcome Back
               </h2>
               <Sparkles className="w-6 h-6 text-gray-400 animate-pulse" />
@@ -304,8 +304,8 @@ const handleLogin = async (e) => {
                 disabled={loading}
                 className="relative w-full group/btn overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 rounded-xl blur-sm group-hover/btn:blur transition-all duration-300" />
-                <div className="relative bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-600 hover:via-gray-500 hover:to-gray-600 disabled:from-gray-800 disabled:to-gray-800 text-white font-semibold py-3 rounded-xl transition-all duration-300 disabled:cursor-not-allowed shadow-lg hover:shadow-gray-500/50 hover:scale-[1.02] active:scale-[0.98]">
+                <div className="absolute inset-0 bg-linear-to-r from-gray-600 via-gray-500 to-gray-600 rounded-xl blur-sm group-hover/btn:blur transition-all duration-300" />
+                <div className="relative bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-600 hover:via-gray-500 hover:to-gray-600 disabled:from-gray-800 disabled:to-gray-800 text-white font-semibold py-3 rounded-xl transition-all duration-300 disabled:cursor-not-allowed shadow-lg hover:shadow-gray-500/50 hover:scale-[1.02] active:scale-[0.98]">
                   {loading ? (
                     <span className="flex items-center justify-center gap-2">
                       <div className="w-5 h-5 border-2 border-gray-300 border-t-transparent rounded-full animate-spin" />
@@ -320,9 +320,9 @@ const handleLogin = async (e) => {
 
             {/* Divider */}
             <div className="flex items-center gap-4 my-6">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-gray-700 to-transparent" />
               <span className="text-gray-500 text-sm">or</span>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+              <div className="flex-1 h-px bg-linear-to-r from-transparent via-gray-700 to-transparent" />
             </div>
 
             {/* Google Sign In */}

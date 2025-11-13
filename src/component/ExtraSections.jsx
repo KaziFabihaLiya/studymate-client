@@ -37,11 +37,11 @@ const ExtraSections = ({ testimonials = [] }) => {
   return (
     <div className="bg-white min-h-screen">
       {/* How It Works Section */}
-      <section className="relative py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+      <section className="relative py-20 bg-linear-to-br from-gray-50 to-white overflow-hidden">
         {/* 3D Floating Book Element */}
         <div className="absolute top-10 right-10 animate-float-slow hidden lg:block">
           <div className="relative w-32 h-40 transform-gpu perspective-1000">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-500">
+            <div className="absolute inset-0 bg-linear-to-br from-blue-500 to-purple-600 rounded-lg shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-500">
               <div className="absolute inset-2 bg-white/90 rounded flex items-center justify-center">
                 <BookOpen size={40} className="text-blue-600" />
               </div>
@@ -51,13 +51,13 @@ const ExtraSections = ({ testimonials = [] }) => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-50 to-blue-50 rounded-full mb-6 border border-green-100">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-green-50 to-blue-50 rounded-full mb-6 border border-green-100">
               <Zap size={18} className="text-green-600 animate-pulse" />
               <span className="text-sm font-semibold text-gray-700">
                 Simple Process
               </span>
             </div>
-            <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+            <h2 className="text-5xl font-bold mb-4 bg-linear-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
               How It Works
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -104,7 +104,7 @@ const ExtraSections = ({ testimonials = [] }) => {
               >
                 {/* Step Number Badge */}
                 <div
-                  className={`absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center text-white text-xl font-bold shadow-xl group-hover:scale-110 transition-transform duration-300`}
+                  className={`absolute -top-4 -right-4 w-16 h-16 bg-linear-to-br ${item.color} rounded-full flex items-center justify-center text-white text-xl font-bold shadow-xl group-hover:scale-110 transition-transform duration-300`}
                 >
                   {item.step}
                 </div>
@@ -112,10 +112,10 @@ const ExtraSections = ({ testimonials = [] }) => {
                 {/* Icon Container with 3D Effect */}
                 <div className="relative mb-6">
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${item.color} blur-xl opacity-30 group-hover:opacity-50 transition-opacity rounded-full`}
+                    className={`absolute inset-0 bg-linear-to-br ${item.color} blur-xl opacity-30 group-hover:opacity-50 transition-opacity rounded-full`}
                   ></div>
                   <div
-                    className={`relative w-20 h-20 bg-gradient-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
+                    className={`relative w-20 h-20 bg-linear-to-br ${item.color} rounded-2xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}
                   >
                     {item.icon}
                   </div>
@@ -131,7 +131,7 @@ const ExtraSections = ({ testimonials = [] }) => {
 
                 {/* Hover Border Effect */}
                 <div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
+                  className={`absolute inset-0 rounded-2xl bg-linear-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
                 ></div>
               </div>
             ))}
@@ -140,12 +140,12 @@ const ExtraSections = ({ testimonials = [] }) => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+      <section className="relative py-20 bg-linear-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
         {/* 3D Floating Trophy Element */}
         <div className="absolute bottom-10 left-10 animate-float-slow hidden lg:block">
           <div className="relative w-32 h-32">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full blur-2xl opacity-50"></div>
-            <div className="relative w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl animate-spin-slow">
+            <div className="absolute inset-0 bg-linear-to-br from-yellow-400 to-orange-500 rounded-full blur-2xl opacity-50"></div>
+            <div className="relative w-32 h-32 bg-linear-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl animate-spin-slow">
               <Award size={50} className="text-white" />
             </div>
           </div>
@@ -202,7 +202,7 @@ const ExtraSections = ({ testimonials = [] }) => {
                   <div className="relative z-10">
                     <div className="flex items-center gap-4 mb-6">
                       <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-md opacity-50"></div>
+                        <div className="absolute inset-0 bg-linear-to-br from-blue-400 to-purple-500 rounded-full blur-md opacity-50"></div>
                         <img
                           src={testimonial.avatar}
                           alt={testimonial.name}
@@ -229,7 +229,7 @@ const ExtraSections = ({ testimonials = [] }) => {
                   </div>
 
                   {/* Glow Effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"></div>
+                  <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500"></div>
                 </div>
               ))
             ) : (

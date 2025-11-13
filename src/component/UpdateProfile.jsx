@@ -112,7 +112,7 @@ const UpdateProfile = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100">
         <div className="text-center">
           <Loader className="w-12 h-12 animate-spin text-gray-600 mx-auto mb-4" />
           <p className="text-gray-600 text-lg">Loading profile...</p>
@@ -123,7 +123,7 @@ const UpdateProfile = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100">
         <div className="text-center">
           <p className="text-red-600 text-lg mb-4">{error}</p>
           <button
@@ -138,7 +138,7 @@ const UpdateProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen mt-20 bg-linear-to-br from-gray-50 via-gray-100 to-gray-200 py-30 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 animate-fade-in">
@@ -289,7 +289,7 @@ const UpdateProfile = () => {
               <button
                 type="submit"
                 disabled={updating}
-                className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-gray-600 to-black text-white py-3 px-6 rounded-lg font-semibold hover:from-gray-700 hover:to-gray-900 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="flex-1 flex items-center justify-center gap-2 bg-linear-to-r from-gray-600 to-black text-white py-3 px-6 rounded-lg font-semibold hover:from-gray-700 hover:to-gray-900 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {updating ? (
                   <>
@@ -315,14 +315,6 @@ const UpdateProfile = () => {
               </button>
             </div>
           </form>
-        </div>
-
-        {/* Info Card */}
-        <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg animate-fade-in">
-          <p className="text-sm text-blue-800">
-            <strong>Note:</strong> Email field cannot be changed. All other
-            fields can be updated as needed.
-          </p>
         </div>
       </div>
 

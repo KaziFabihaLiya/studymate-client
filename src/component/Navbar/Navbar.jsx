@@ -74,8 +74,8 @@ const Navbar = () => {
         <Link to="/" className="flex items-center space-x-3">
           <div className="relative">
             {/* Glowing background effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-600 rounded-xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-            <div className="relative flex items-center justify-center w-12 h-12 bg-gradient-to-br from-white/20 to-white/5 backdrop-blur-xl rounded-xl border border-white/30 shadow-2xl group-hover:shadow-gray-500/50 transition-all duration-500 group-hover:scale-105">
+            <div className="absolute inset-0 bg-linear-to-r from-gray-400 to-gray-600 rounded-xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <div className="relative flex items-center justify-center w-12 h-12 bg-linear-to-br from-white/20 to-white/5 backdrop-blur-xl rounded-xl border border-white/30 shadow-2xl group-hover:shadow-gray-500/50 transition-all duration-500 group-hover:scale-105">
               <Sparkles
                 className="w-6 h-6 text-gray-800 group-hover:text-gray-900 transition-colors duration-300"
                 strokeWidth={2.5}
@@ -83,7 +83,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-700 via-gray-900 to-black bg-clip-text text-transparent group-hover:from-gray-800 group-hover:via-black group-hover:to-gray-900 transition-all duration-500">
+            <h2 className="text-2xl font-bold bg-linear-to-r from-gray-700 via-gray-900 to-black bg-clip-text text-transparent group-hover:from-gray-800 group-hover:via-black group-hover:to-gray-900 transition-all duration-500">
               StudyMate
             </h2>
             <span className="text-xs text-gray-600 font-medium tracking-wider">
@@ -120,7 +120,7 @@ const Navbar = () => {
             {/* Profile Photo Button */}
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="group flex items-center space-x-3 px-4 py-2 bg-gradient-to-r from-white/15 to-white/5 backdrop-blur-xl rounded-full border border-white/30 shadow-lg hover:shadow-xl hover:shadow-gray-500/20 transition-all duration-500 hover:scale-105"
+              className="group flex items-center space-x-3 px-4 py-2 bg-linear-to-r from-white/15 to-white/5 backdrop-blur-xl rounded-full border border-white/30 shadow-lg hover:shadow-xl hover:shadow-gray-500/20 transition-all duration-500 hover:scale-105"
             >
               {/* Profile Photo */}
               <div className="relative">
@@ -131,7 +131,7 @@ const Navbar = () => {
                     className="w-10 h-10 rounded-full object-cover border-2 border-gray-300 group-hover:border-gray-400 transition-colors duration-300"
                   />
                 ) : (
-                  <div className="w-10 h-10 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center border-2 border-gray-300 group-hover:border-gray-400 transition-colors duration-300">
+                  <div className="w-10 h-10 bg-linear-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center border-2 border-gray-300 group-hover:border-gray-400 transition-colors duration-300">
                     <User className="w-5 h-5 text-white" strokeWidth={2.5} />
                   </div>
                 )}
@@ -159,7 +159,7 @@ const Navbar = () => {
             {dropdownOpen && (
               <div className="absolute right-0 mt-3 w-56 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                 {/* User Info Section */}
-                <div className="px-4 py-3 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200">
+                <div className="px-4 py-3 bg-linear-to-r from-gray-50 to-white border-b border-gray-200">
                   <div className="flex items-center space-x-3">
                     {user.photoURL ? (
                       <img
@@ -168,7 +168,7 @@ const Navbar = () => {
                         className="w-12 h-12 rounded-full object-cover border-2 border-gray-300"
                       />
                     ) : (
-                      <div className="w-12 h-12 bg-gradient-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-linear-to-br from-gray-400 to-gray-600 rounded-full flex items-center justify-center">
                         <User
                           className="w-6 h-6 text-white"
                           strokeWidth={2.5}
@@ -193,7 +193,7 @@ const Navbar = () => {
                     onClick={handleProfileClick}
                     className="w-full px-4 py-3 flex items-center space-x-3 hover:bg-gray-100 transition-colors duration-200 group"
                   >
-                    <div className="w-9 h-9 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center group-hover:from-gray-300 group-hover:to-gray-400 transition-all duration-200">
+                    <div className="w-9 h-9 bg-linear-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center group-hover:from-gray-300 group-hover:to-gray-400 transition-all duration-200">
                       <User
                         className="w-5 h-5 text-gray-700"
                         strokeWidth={2.5}
@@ -214,7 +214,7 @@ const Navbar = () => {
                     onClick={handleLogout}
                     className="w-full px-4 py-3 flex items-center space-x-3 hover:bg-red-50 transition-colors duration-200 group"
                   >
-                    <div className="w-9 h-9 bg-gradient-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center group-hover:from-red-200 group-hover:to-red-300 transition-all duration-200">
+                    <div className="w-9 h-9 bg-linear-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center group-hover:from-red-200 group-hover:to-red-300 transition-all duration-200">
                       <LogOut
                         className="w-5 h-5 text-red-600"
                         strokeWidth={2.5}
@@ -237,7 +237,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-3">
             {/* Login button */}
             <Link to="/login">
-              <button className="group relative px-5 py-2.5 bg-gradient-to-r from-white/15 to-white/5 backdrop-blur-xl rounded-full border border-white/30 shadow-lg hover:shadow-xl hover:shadow-gray-500/20 transition-all duration-500 hover:scale-105">
+              <button className="group relative px-5 py-2.5 bg-linear-to-r from-white/15 to-white/5 backdrop-blur-xl rounded-full border border-white/30 shadow-lg hover:shadow-xl hover:shadow-gray-500/20 transition-all duration-500 hover:scale-105">
                 <div className="flex items-center space-x-2">
                   <LogIn
                     className="w-4 h-4 text-gray-700 group-hover:text-gray-900 transition-colors duration-300"
@@ -252,9 +252,9 @@ const Navbar = () => {
 
             {/* Register button */}
             <Link to="/register">
-              <button className="group relative px-5 py-2.5 bg-gradient-to-r from-gray-700 to-gray-900 backdrop-blur-xl rounded-full border border-gray-600 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 transition-all duration-500 hover:scale-105 overflow-hidden">
+              <button className="group relative px-5 py-2.5 bg-linear-to-r from-gray-700 to-gray-900 backdrop-blur-xl rounded-full border border-gray-600 shadow-xl hover:shadow-2xl hover:shadow-gray-500/50 transition-all duration-500 hover:scale-105 overflow-hidden">
                 {/* Shimmer effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
                 <div className="relative flex items-center space-x-2">
                   <UserPlus

@@ -247,17 +247,17 @@ const CreateProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-b from-gray-50 via-white to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-white/60 to-white/30 backdrop-blur-sm rounded-full border border-gray-200 mb-6">
+          <div className="inline-flex items-center space-x-2 px-4 py-2 bg-linear-to-r from-white/60 to-white/30 backdrop-blur-sm rounded-full border border-gray-200 mb-6">
             <Sparkles className="w-5 h-5 text-gray-700" strokeWidth={2.5} />
             <span className="text-sm font-bold text-gray-700 uppercase tracking-wider">
               Build Your Profile
             </span>
           </div>
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-700 via-gray-900 to-black bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl font-bold bg-linear-to-r from-gray-700 via-gray-900 to-black bg-clip-text text-transparent mb-4">
             Create Partner Profile
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -294,7 +294,7 @@ const CreateProfile = () => {
           {/* Basic Information Card */}
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200 shadow-xl p-8">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center">
                 <User className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
@@ -322,7 +322,7 @@ const CreateProfile = () => {
                       />
                     ) : null}
                     <div
-                      className={`w-32 h-32 bg-gradient-to-br from-gray-200 to-gray-300 rounded-2xl flex items-center justify-center border-4 border-gray-200 ${
+                      className={`w-32 h-32 bg-linear-to-br from-gray-200 to-gray-300 rounded-2xl flex items-center justify-center border-4 border-gray-200 ${
                         formData.profileimage ? "hidden" : ""
                       }`}
                     >
@@ -404,7 +404,7 @@ const CreateProfile = () => {
           {/* Academic Information Card */}
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200 shadow-xl p-8">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
@@ -426,7 +426,7 @@ const CreateProfile = () => {
                       onClick={() => handleSubjectToggle(subject)}
                       className={`px-4 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 ${
                         formData.subjects.includes(subject)
-                          ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white shadow-lg scale-105"
+                          ? "bg-linear-to-r from-gray-700 to-gray-900 text-white shadow-lg scale-105"
                           : "bg-white border-2 border-gray-300 text-gray-700 hover:border-gray-400"
                       }`}
                     >
@@ -451,7 +451,7 @@ const CreateProfile = () => {
                   {formData.skills.map((skill, index) => (
                     <span
                       key={index}
-                      className="inline-flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-gray-100 to-gray-50 border border-gray-300 rounded-full text-sm font-semibold text-gray-700"
+                      className="inline-flex items-center space-x-2 px-4 py-2 bg-linear-to-r from-gray-100 to-gray-50 border border-gray-300 rounded-full text-sm font-semibold text-gray-700"
                     >
                       <span>{skill}</span>
                       <button
@@ -491,7 +491,7 @@ const CreateProfile = () => {
                         }`}
                       >
                         <div
-                          className={`w-12 h-12 bg-gradient-to-br ${option.color} rounded-xl flex items-center justify-center mx-auto mb-2`}
+                          className={`w-12 h-12 bg-linear-to-br ${option.color} rounded-xl flex items-center justify-center mx-auto mb-2`}
                         >
                           <Icon
                             className="w-6 h-6 text-white"
@@ -512,7 +512,7 @@ const CreateProfile = () => {
           {/* Study Preferences Card */}
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200 shadow-xl p-8">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
                 <Clock className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
@@ -610,7 +610,7 @@ const CreateProfile = () => {
                       onClick={() => handleAvailabilityToggle(day)}
                       className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-300 ${
                         formData.availability.includes(day)
-                          ? "bg-gradient-to-r from-gray-700 to-gray-900 text-white"
+                          ? "bg-linear-to-r from-gray-700 to-gray-900 text-white"
                           : "bg-white border border-gray-300 text-gray-700 hover:border-gray-400"
                       }`}
                     >
@@ -625,7 +625,7 @@ const CreateProfile = () => {
           {/* Additional Information Card */}
           <div className="bg-white/80 backdrop-blur-sm rounded-3xl border border-gray-200 shadow-xl p-8">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
                 <Award className="w-5 h-5 text-white" strokeWidth={2.5} />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">
@@ -671,10 +671,10 @@ const CreateProfile = () => {
             <button
               type="submit"
               disabled={loading}
-              className="group relative px-12 py-4 bg-gradient-to-r from-gray-700 to-gray-900 text-white font-bold rounded-2xl shadow-2xl hover:shadow-gray-500/50 transition-all duration-500 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
+              className="group relative px-12 py-4 bg-linear-to-r from-gray-700 to-gray-900 text-white font-bold rounded-2xl shadow-2xl hover:shadow-gray-500/50 transition-all duration-500 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
             >
               {/* Shimmer effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
               <div className="relative flex items-center space-x-3">
                 {loading ? (
