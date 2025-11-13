@@ -2,7 +2,7 @@
 
 ### 🌐 Live Site URL
 
-[👉 Visit StudyMate Live](https://studymate-client.netlify.app)
+[👉 Visit StudyMate Live](https://studymate-auth-firebase.web.app/)
 
 ---
 
@@ -63,8 +63,8 @@ sweetalert2, three, tailwindcss, daisyui, react-router, vite
 
 ## 🌍 Deployment
 
-- **Client:** Hosted on **Netlify** → [Live Site](https://studymate-client.netlify.app)  
-- **Server:** Hosted on **Vercel** → [API Endpoint](https://studymate-server.vercel.app)
+- **Client:** Hosted on **Netlify** → [Live Site](https://studymate-auth-firebase.web.app/)  
+- **Server:** Hosted on **Vercel** → [API Endpoint](https://study-mate-server-six.vercel.app/)
 
 ---
 
