@@ -20,6 +20,7 @@ import MyConnections from './component/MyConnections.jsx';
 import PrivateRoutes from './Routes/PrivateRoute.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
 import UpdateProfile from './component/UpdateProfile.jsx';
+import Profile from './component/Profile.jsx';
 
 
 const router = createBrowserRouter([
@@ -63,10 +64,10 @@ const router = createBrowserRouter([
         element: <ExtraSections />,
       },
       {
-        path: "/my-profiles",
+        path: "/profile",
         element: (
           <PrivateRoute>
-            <MyConnections />
+            <Profile />
           </PrivateRoute>
         ),
       },
