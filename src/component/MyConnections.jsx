@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react';
 import { AuthContext } from '../Auth/AuthContext';
-import PartnerCard from './PartnerCard';
+import MyPartnerCard from './MyPartnerCard';
 
 const MyConnections = () => {
     const { user } = use(AuthContext);
@@ -24,7 +24,7 @@ const MyConnections = () => {
             <h1 className='text-5xl text-center font-bold p-10 mb-8'>My Connections</h1>
             <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mx-auto">
               {partner.map((partner) => (
-                <PartnerCard key={partner._id} partner={partner} />
+                <MyPartnerCard key={partner._id} partner={partner} />
               ))}
             </div>
           </div>

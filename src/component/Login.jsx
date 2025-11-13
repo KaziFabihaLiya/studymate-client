@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import * as THREE from "three";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const { signInUser, signInWithGoogle } = useContext(AuthContext);
@@ -137,45 +138,65 @@ export default function Login() {
     }
   }, [mousePosition]);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    setLoading(true);
-    signInUser(email, password)
-      .then((res) => {
-        console.log(res.user);
-        toast.success("Successfully Logged In!");
-        setEmail("");
-        setPassword("");
-        navigate(location.state?.from?.pathname || "/");
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.code === "auth/user-not-found") {
-          toast.error("Email not found");
-        } else if (error.code === "auth/wrong-password") {
-          toast.error("Incorrect password");
-        } else {
-          toast.error("Login failed. Please try again.");
-        }
-      })
-      .finally(() => setLoading(false));
-  };
+  try {
+    const res = await signInUser(email, password);
+
+    // Ensure valid user object before showing success toast
+    if (res && res.user) {
+      toast.success("Successfully Logged In!");
+      setEmail("");
+      setPassword("");
+      navigate(location.state?.from?.pathname || "/");
+    } else {
+      toast.error("Login failed. Please try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    if (error.code === "auth/user-not-found") {
+      toast.error("Email not found.");
+    } else if (error.code === "auth/wrong-password") {
+      toast.error("Incorrect password.");
+    } else {
+      toast.error("Login failed. Please try again.");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
+
+
 
   const handleGoogleSignIn = () => {
     setLoading(true);
     signInWithGoogle()
       .then((res) => {
-        toast.success("Successfully Logged In!");
+        //toast.success("Successfully Logged In!");
+        Swal.fire({
+          title: "Successfully Logged In!",
+          icon: "success",
+          draggable: true,
+        });
         console.log(res.user);
         navigate(location?.state?.from?.pathname || "/");
       })
       .catch((error) => {
         console.log(error);
         if (error.code === "auth/popup-closed-by-user") {
-          toast.error("Google sign-in cancelled.");
+          Swal.fire({
+            icon: "error",
+            title: "Google sign-in cancelled.",
+            text: "Something went wrong!",
+          });
         } else {
-          toast.error("Google login failed. Please try again.");
+          Swal.fire({
+            icon: "error",
+            title: "Google login failed. Please try again.",
+            text: "Something went wrong!",
+          });
         }
       })
       .finally(() => setLoading(false));

@@ -229,7 +229,7 @@ const CreateProfile = () => {
         console.log("Profile created:", result);
         setSuccess(true);
         setTimeout(() => {
-          navigate("/my-profile");
+          navigate("/my-profiles");
         }, 2000);
       } else {
         toast.error("Failed to create profile");

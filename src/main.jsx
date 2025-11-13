@@ -19,6 +19,7 @@ import ExtraSections from './component/ExtraSections.jsx';
 import MyConnections from './component/MyConnections.jsx';
 import PrivateRoutes from './Routes/PrivateRoute.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
+import UpdateProfile from './component/UpdateProfile.jsx';
 
 
 const router = createBrowserRouter([
@@ -66,6 +67,34 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyConnections />
+          </PrivateRoute>
+        ),
+      },
+      // {
+      //   path: "/profileDetails/:id",
+      //   loader: ({ params }) =>
+      //     fetch(`http://localhost:5000/profileDetails/${params.id}`),
+      //   element: (
+      //     <PrivateRoute>
+      //       <ProfileDetails />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      {
+        path: "/my-profiles",
+        element: (
+          <PrivateRoute>
+            <MyConnections />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-partner/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/profileDetails/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
           </PrivateRoute>
         ),
       },

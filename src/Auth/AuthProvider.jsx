@@ -8,7 +8,6 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import toast from "react-hot-toast";
 import { AuthContext } from "./AuthContext";
 import { auth } from "../firebase/firebase.init";
 
@@ -33,7 +32,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInUser = (email, password) => {
-    toast.success("Successfully Logged In!");
     return signInWithEmailAndPassword(auth, email, password);
   };
 

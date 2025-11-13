@@ -105,7 +105,7 @@ const handleViewProfile = () => {
           {/* Animated Progress Bar - Full width, so it spans the card */}
           <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-gray-600 to-black h-fulltransition-all duration-700 ease-out"
+              className="bg-gradient-to-r from-gray-600 to-black h-full transition-all duration-700 ease-out"
               style={{
                 width: `${getExperienceProgress(partner.experienceLevel)}%`,
               }}
