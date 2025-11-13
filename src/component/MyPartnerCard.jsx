@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  ChevronRight,
   Star,
   Clock,
   BookOpen,

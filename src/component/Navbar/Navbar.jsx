@@ -8,13 +8,16 @@ import {
   UserPlus,
   Sparkles,
   ChevronDown,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  console.log(user)
+  console.log(user);
   const [isVisible, setIsVisible] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
@@ -26,7 +29,12 @@ const Navbar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -37,6 +45,10 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
   const handleLogout = () => {
     signOutUser();
@@ -208,6 +220,39 @@ const Navbar = () => {
                       </span>
                     </div>
                   </button>
+
+                  {/* Theme Toggle Option */}
+                  <div className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-100 transition-colors duration-200 group">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-9 h-9 bg-linear-to-br from-blue-200 to-blue-300 rounded-lg flex items-center justify-center group-hover:from-blue-300 group-hover:to-blue-400 transition-all duration-200">
+                        {theme === "dark" ? (
+                          <Sun
+                            className="w-5 h-5 text-yellow-600"
+                            strokeWidth={2.5}
+                          />
+                        ) : (
+                          <Moon
+                            className="w-5 h-5 text-blue-700"
+                            strokeWidth={2.5}
+                          />
+                        )}
+                      </div>
+                      <div className="flex flex-col items-start">
+                        <span className="text-sm font-semibold text-gray-800">
+                          {theme === "dark" ? "Light Mode" : "Dark Mode"}
+                        </span>
+                        <span className="text-xs text-gray-600">
+                          Switch theme
+                        </span>
+                      </div>
+                    </div>
+                    <input
+                      onChange={(e) => handleTheme(e.target.checked)}
+                      type="checkbox"
+                      checked={theme === "dark"}
+                      className="toggle toggle-sm"
+                    />
+                  </div>
 
                   {/* Logout Option */}
                   <button

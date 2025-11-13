@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
   Star,
-  MapPin,
   Clock,
   BookOpen,
   Award,
   Users,
   Mail,
   Video,
-  Calendar,
   TrendingUp,
-  MessageCircle,
   Heart,
   Share2,
   ChevronLeft,
@@ -19,14 +16,18 @@ import {
   Target,
   Globe,
   LocateIcon,
+  UserPlus,
 } from "lucide-react";
-import { useLoaderData, useNavigate} from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProfileDetails = () => {
   const [isFavorited, setIsFavorited] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isRequestSending, setIsRequestSending] = useState(false);
+  const [partnerCount, setPartnerCount] = useState(0);
   const navigate = useNavigate();
   const data = useLoaderData();
   const { user } = useContext(AuthContext);
@@ -39,8 +40,87 @@ const ProfileDetails = () => {
       return;
     }
     setIsVisible(true);
-  }, [user, navigate]);
+    if (partner) {
+      setPartnerCount(partner.partnerCount || 0);
+    }
+  }, [user, navigate, partner]);
 
+  const handleSendPartnerRequest = async () => {
+    if (!user || !user.email) {
+      toast.error("Please login to send partner request");
+      return;
+    }
+
+    // Check if user is trying to send request to their own profile
+    if (partner.email === user.email) {
+      toast.error("You cannot send a request to your own profile");
+      return;
+    }
+
+    setIsRequestSending(true);
+
+    // Validate and log partnerId
+    console.log("Frontend - Sending partnerId:", partner._id, {
+      type: typeof partner._id,
+      length: partner._id?.length,
+      startsWith: partner._id?.slice(0, 6),
+      isHex: /^[0-9a-fA-F]{24}$/.test(partner._id || ""),
+    });
+
+    if (
+      !partner._id ||
+      typeof partner._id !== "string" ||
+      partner._id.length !== 24 ||
+      !/^[0-9a-fA-F]{24}$/.test(partner._id)
+    ) {
+      console.error("Invalid partner ID detected - aborting");
+      toast.error("Invalid profile ID. Please refresh the page and try again.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/sendPartnerRequest", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          partnerId: partner._id,
+          userEmail: user.email,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        // Update local partner count
+        setPartnerCount((prev) => prev + 1);
+        toast.success("Partner request sent successfully! 🎉", {
+          duration: 4000,
+          position: "top-center",
+          style: {
+            background: "#10B981",
+            color: "#fff",
+            fontWeight: "600",
+          },
+          icon: "✅",
+        });
+      } else {
+        toast.error(result.message || "Failed to send partner request", {
+          duration: 4000,
+          position: "top-center",
+        });
+      }
+    } catch (error) {
+      console.error("Error sending partner request:", error);
+      toast.error("An error occurred. Please try again later.", {
+        duration: 4000,
+        position: "top-center",
+      });
+    } finally {
+      setIsRequestSending(false);
+    }
+  };
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
   };
@@ -107,6 +187,9 @@ const ProfileDetails = () => {
 
   return (
     <div className="min-h-screen pt-10 mt-20 bg-linear-to-br from-slate-50 via-white to-slate-50">
+      {/* Toast Container */}
+      <Toaster />
+
       {/* Animated Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
@@ -199,7 +282,7 @@ const ProfileDetails = () => {
                   <div className="flex items-center justify-between">
                     {renderStars(partner.rating)}
                     <span className="text-sm text-gray-500">
-                      ({partner.partnerCount} partners)
+                      ({partnerCount} partners)
                     </span>
                   </div>
                 </div>
@@ -261,6 +344,28 @@ const ProfileDetails = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Send Partner Request Button */}
+                <button
+                  onClick={handleSendPartnerRequest}
+                  disabled={isRequestSending}
+                  className="w-full py-4 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 group"
+                >
+                  {isRequestSending ? (
+                    <>
+                      <div className="w-5 h-5 border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <UserPlus
+                        size={24}
+                        className="group-hover:scale-110 transition-transform"
+                      />
+                      <span>Send Partner Request</span>
+                    </>
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -364,9 +469,7 @@ const ProfileDetails = () => {
                   <Users size={32} className="opacity-80" />
                   <Target size={24} className="opacity-60" />
                 </div>
-                <p className="text-3xl font-bold mb-1">
-                  {partner.partnerCount}+
-                </p>
+                <p className="text-3xl font-bold mb-1">{partnerCount}+</p>
                 <p className="text-orange-100 text-sm font-medium">
                   Study Partners
                 </p>
