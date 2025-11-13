@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router";
 import PartnerCard from "../component/PartnerCard";
 import ExtraSections from "../component/ExtraSections";
 import { Sparkles, ArrowRight } from "lucide-react";
+import api from "../utils/api";
 
 const Homepage = () => {
   const data = useLoaderData(); // Top-rated partner profiles
@@ -12,13 +13,17 @@ const Homepage = () => {
   const [testimonials, setTestimonials] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/testimonials")
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchTestimonials = async () => {
+      try {
+        const { data } = await api.get("/testimonials");
         console.log("Testimonials data:", data);
         setTestimonials(data);
-      })
-      .catch((err) => console.error("Error fetching testimonials:", err));
+      } catch (err) {
+        console.error("Error fetching testimonials:", err);
+      }
+    };
+
+    fetchTestimonials();
   }, []);
 
   return (

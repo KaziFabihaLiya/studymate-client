@@ -1,27 +1,25 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
-import { createBrowserRouter } from "react-router";
-import { RouterProvider } from "react-router/dom";
-import Home from './layout/Home.jsx';
-import "./Routes/PrivateRoute.jsx"
-import Login from './component/Login.jsx';
-import Register from './component/Register.jsx';
-import ForgotPassword from './component/ForgetPassword.jsx';
-import AuthProvider from './Auth/AuthProvider.jsx';
-import ErrorPage from './component/ErrorPage.jsx';
-import Homepage from './layout/Homepage.jsx';
-import PartnerProfiles from './component/PartnerProfiles.jsx';
-import ProfileDetails from './component/ProfileDetails.jsx';
-import CreateProfile from './component/CreateProfile.jsx';
-import ExtraSections from './component/ExtraSections.jsx';
-import MyConnections from './component/MyConnections.jsx';
-import PrivateRoutes from './Routes/PrivateRoute.jsx';
-import PrivateRoute from './Routes/PrivateRoute.jsx';
-import UpdateProfile from './component/UpdateProfile.jsx';
-import Profile from './component/Profile.jsx';
-
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router"; // Fixed: Single import from react-router-dom
+import Home from "./layout/Home.jsx";
+import "./Routes/PrivateRoute.jsx";
+import Login from "./component/Login.jsx";
+import Register from "./component/Register.jsx";
+import ForgotPassword from "./component/ForgetPassword.jsx";
+import AuthProvider from "./Auth/AuthProvider.jsx";
+import ErrorPage from "./component/ErrorPage.jsx";
+import Homepage from "./layout/Homepage.jsx";
+import PartnerProfiles from "./component/PartnerProfiles.jsx";
+import ProfileDetails from "./component/ProfileDetails.jsx";
+import CreateProfile from "./component/CreateProfile.jsx";
+import ExtraSections from "./component/ExtraSections.jsx";
+import MyConnections from "./component/MyConnections.jsx";
+import PrivateRoute from "./Routes/PrivateRoute.jsx"; // Fixed: Single import
+import UpdateProfile from "./component/UpdateProfile.jsx";
+import Profile from "./component/Profile.jsx";
+import api from "./utils/api"; // Add this import (adjust path if needed)
 
 const router = createBrowserRouter([
   {
@@ -31,7 +29,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />,
-        loader: () => fetch("http://localhost:5000/top-rated"),
+        loader: async () => {
+          const { data } = await api.get("/top-rated");
+          return data;
+        },
       },
       {
         path: "/login",
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/AllPartnerProfile",
-        loader: () => fetch("http://localhost:5000/AllPartnerProfile"),
+        loader: async () => {
+          const { data } = await api.get("/AllPartnerProfile");
+          return data;
+        },
         element: <PartnerProfiles />,
       },
       {
@@ -60,7 +64,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/testimonials",
-        loader: () => fetch("http://localhost:5000/testimonials"),
+        loader: async () => {
+          const { data } = await api.get("/testimonials");
+          return data;
+        },
         element: <ExtraSections />,
       },
       {
@@ -71,16 +78,18 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: "/profileDetails/:id",
-      //   loader: ({ params }) =>
-      //     fetch(`http://localhost:5000/profileDetails/${params.id}`),
-      //   element: (
-      //     <PrivateRoute>
-      //       <ProfileDetails />
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: "/profileDetails/:id",
+        loader: async ({ params }) => {
+          const { data } = await api.get(`/profileDetails/${params.id}`);
+          return data;
+        },
+        element: (
+          <PrivateRoute>
+            <ProfileDetails />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/my-profiles",
         element: (
@@ -91,21 +100,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/update-partner/:id",
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/profileDetails/${params.id}`),
+        loader: async ({ params }) => {
+          const { data } = await api.get(`/profileDetails/${params.id}`);
+          return data;
+        },
         element: (
           <PrivateRoute>
             <UpdateProfile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/profileDetails/:id",
-        loader: ({ params }) =>
-          fetch(`http://localhost:5000/profileDetails/${params.id}`),
-        element: (
-          <PrivateRoute>
-            <ProfileDetails />
           </PrivateRoute>
         ),
       },

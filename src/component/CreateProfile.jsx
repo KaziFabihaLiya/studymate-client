@@ -1,4 +1,4 @@
-import React, { useState, use, useEffect } from "react";
+import React, { useState, use, useEffect, useContext } from "react";
 import { useNavigate } from "react-router";
 import {
   User,
@@ -19,9 +19,10 @@ import {
 } from "lucide-react";
 import { AuthContext } from "../Auth/AuthContext";
 import toast from "react-hot-toast";
+import api from "../utils/api";
 
 const CreateProfile = () => {
-  const { user } = use(AuthContext);
+const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -195,55 +196,48 @@ const CreateProfile = () => {
     setLoading(true);
     setError("");
 
-    // Validation
-    if (
-      !formData.name ||
-      !formData.subjects.length ||
-      !formData.studyMode ||
-      !formData.experienceLevel
-    ) {
-      setError("Please fill in all required fields");
-      setLoading(false);
-      return;
-    }
-
     try {
-      // Map preferredStudyTime to availabilityTime
-      const submitData = {
-        ...formData,
-        availabilityTime: formData.preferredStudyTime || "",
-      };
+      // Basic validation
+      if (
+        !formData.name.trim() ||
+        !formData.subject.trim() ||
+        !formData.studyMode
+      ) {
+        throw new Error(
+          "Please fill in required fields: Name, Subject, and Study Mode."
+        );
+      }
 
-      // Send as JSON
-      const response = await fetch("http://localhost:5000/createProfile", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submitData),
-      });
+      const { data } = await api.post("/createProfile", formData); // Updated: Axios POST
 
-      if (response.ok) {
-        const result = await response.json();
-        toast.success("Profile created Successfully");
-        console.log("Profile created:", result);
+      if (data.success) {
+        toast.success("Profile created successfully! 🎉");
         setSuccess(true);
-        setTimeout(() => {
-          navigate("/my-profiles");
-        }, 2000);
+        setTimeout(() => navigate("/my-profiles"), 2000);
       } else {
-        toast.error("Failed to create profile");
-        throw new Error("Failed to create profile");
+        throw new Error(data.message || "Failed to create profile.");
       }
     } catch (err) {
-      setError(err.message || "Failed to create profile. Please try again.");
+      console.error("Error creating profile:", err);
+      setError(err.message || "An error occurred. Please try again.");
+      toast.error(err.message || "Failed to create profile.");
     } finally {
       setLoading(false);
     }
   };
 
-  if (!user) {
-    return null;
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center px-4">
+        <div className="text-center max-w-md">
+          <CheckCircle size={80} className="mx-auto text-green-500 mb-4" />
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Success!</h2>
+          <p className="text-gray-600 mb-6">
+            Your profile has been created. Redirecting...
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

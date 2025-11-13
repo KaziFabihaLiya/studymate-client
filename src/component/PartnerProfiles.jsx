@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import { Users, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useSearchParams } from "react-router";
 import PartnerCard from "./PartnerCard";
+import api from "../utils/api";
 
 const PartnerProfiles = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,31 +14,28 @@ const PartnerProfiles = () => {
   const sortOrder = searchParams.get("sortOrder") || "desc";
   const searchTerm = searchParams.get("search") || "";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const params = new URLSearchParams();
-        if (searchTerm.trim()) {
-          params.set("search", searchTerm.trim());
-        }
-        params.set("sortOrder", sortOrder);
-        const response = await fetch(`http://localhost:5000/AllPartnerProfile?${params.toString()}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setData([]);
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const params = new URLSearchParams();
+      if (searchTerm.trim()) {
+        params.set("search", searchTerm.trim());
       }
-    };
-
-    fetchData();
-  }, [searchTerm, sortOrder]);
+      params.set("sortOrder", sortOrder);
+      const response = await api.get(
+        `/AllPartnerProfile?${params.toString()}`
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchData();
+}, [searchTerm, sortOrder]);
 
   const getSortLabel = () => {
     return sortOrder === "desc" ? "Most Experienced" : "Least Experienced";
@@ -218,9 +215,7 @@ const PartnerProfiles = () => {
         {/* Results Count */}
         <div className="mb-6 flex items-center justify-between animate-fade-in">
           <p className="text-gray-600">
-            <span className="font-semibold text-gray-900">
-              {data.length}
-            </span>{" "}
+            <span className="font-semibold text-gray-900">{data.length}</span>{" "}
             {data.length === 1 ? "partner" : "partners"} found
           </p>
           {searchTerm && (

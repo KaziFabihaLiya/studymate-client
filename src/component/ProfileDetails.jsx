@@ -21,6 +21,7 @@ import {
 import { useLoaderData, useNavigate } from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
 import toast, { Toaster } from "react-hot-toast";
+import api from "../utils/api";
 
 const ProfileDetails = () => {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -75,22 +76,15 @@ const ProfileDetails = () => {
     ) {
       console.error("Invalid partner ID detected - aborting");
       toast.error("Invalid profile ID. Please refresh the page and try again.");
+      setIsRequestSending(false);
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:5000/sendPartnerRequest", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          partnerId: partner._id,
-          userEmail: user.email,
-        }),
+      const { data: result } = await api.post("/sendPartnerRequest", {
+        partnerId: partner._id,
+        userEmail: user.email,
       });
-
-      const result = await response.json();
 
       if (result.success) {
         // Update local partner count
@@ -101,22 +95,14 @@ const ProfileDetails = () => {
           style: {
             background: "#10B981",
             color: "#fff",
-            fontWeight: "600",
           },
-          icon: "✅",
         });
       } else {
-        toast.error(result.message || "Failed to send partner request", {
-          duration: 4000,
-          position: "top-center",
-        });
+        toast.error(result.message || "Failed to send request");
       }
     } catch (error) {
       console.error("Error sending partner request:", error);
-      toast.error("An error occurred. Please try again later.", {
-        duration: 4000,
-        position: "top-center",
-      });
+      toast.error("An error occurred while sending the request");
     } finally {
       setIsRequestSending(false);
     }
