@@ -1,43 +1,76 @@
+
 import React, { useState, useEffect } from "react";
 import { Users, Search, SlidersHorizontal, Sparkles } from "lucide-react";
-import { useLoaderData } from "react-router";
+import { useSearchParams } from "react-router";
 import PartnerCard from "./PartnerCard";
 
 const PartnerProfiles = () => {
-  const data = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortOrder, setSortOrder] = useState("desc");
-  const [filteredData, setFilteredData] = useState([]);
   const [showSortMenu, setShowSortMenu] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
+  const sortOrder = searchParams.get("sortOrder") || "desc";
+  const searchTerm = searchParams.get("search") || "";
+
   useEffect(() => {
-    if (data && Array.isArray(data)) {
-      setFilteredData(data);
-      setLoading(false);
-    }
-  }, [data]);
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const params = new URLSearchParams();
+        if (searchTerm.trim()) {
+          params.set("search", searchTerm.trim());
+        }
+        params.set("sortOrder", sortOrder);
+        const response = await fetch(`http://localhost:5000/AllPartnerProfile?${params.toString()}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setData([]);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  // Filter and sort partners
-  useEffect(() => {
-    let result = data.filter((partner) =>
-      partner.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    fetchData();
+  }, [searchTerm, sortOrder]);
 
-    // Sort by rating
-    if (sortOrder === "asc") {
-      result = result.sort((a, b) => a.rating - b.rating);
-    } else {
-      result = result.sort((a, b) => b.rating - a.rating);
-    }
-
-    setFilteredData(result);
-  }, [searchTerm, sortOrder, data]);
+  const getSortLabel = () => {
+    return sortOrder === "desc" ? "Most Experienced" : "Least Experienced";
+  };
 
   const handleSortChange = (order) => {
-    setSortOrder(order);
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.set("sortOrder", order);
+      return newParams;
+    });
     setShowSortMenu(false);
+  };
+
+  const handleSearchChange = (value) => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      if (value.trim()) {
+        newParams.set("search", value.trim());
+      } else {
+        newParams.delete("search");
+      }
+      return newParams;
+    });
+  };
+
+  const handleClearSearch = () => {
+    setSearchParams((prev) => {
+      const newParams = new URLSearchParams(prev);
+      newParams.delete("search");
+      return newParams;
+    });
   };
 
   if (loading) {
@@ -58,7 +91,7 @@ const PartnerProfiles = () => {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen mt-15 bg-linear-to-br from-slate-50 via-gray-50 to-zinc-50 pt-24 pb-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12 animate-slide-down">
@@ -90,7 +123,7 @@ const PartnerProfiles = () => {
                 className="text-gray-600 group-hover:rotate-90 transition-transform duration-300"
               />
               <span className="font-medium text-gray-700">
-                {sortOrder === "asc" ? "Low to High" : "High to Low"}
+                {getSortLabel()}
               </span>
               <div
                 className={`ml-2 transition-transform duration-300 ${
@@ -127,9 +160,9 @@ const PartnerProfiles = () => {
                         : "hover:bg-gray-100 text-gray-700"
                     }`}
                   >
-                    <div className="font-medium">High to Low</div>
+                    <div className="font-medium">Most Experienced</div>
                     <div className="text-xs opacity-75 mt-0.5">
-                      Best rated first
+                      Advanced levels first
                     </div>
                   </button>
                   <button
@@ -140,9 +173,9 @@ const PartnerProfiles = () => {
                         : "hover:bg-gray-100 text-gray-700"
                     }`}
                   >
-                    <div className="font-medium">Low to High</div>
+                    <div className="font-medium">Least Experienced</div>
                     <div className="text-xs opacity-75 mt-0.5">
-                      Lowest rated first
+                      Beginner levels first
                     </div>
                   </button>
                 </div>
@@ -154,9 +187,9 @@ const PartnerProfiles = () => {
           <div className="flex-1 relative">
             <input
               type="text"
-              placeholder="Search partners by name..."
+              placeholder="Search partners by subject..."
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setIsSearchFocused(false)}
               className={`w-full px-6 py-3.5 pr-14 bg-white border-2 rounded-xl text-gray-900 placeholder-gray-400 transition-all duration-300 outline-none ${
@@ -186,13 +219,13 @@ const PartnerProfiles = () => {
         <div className="mb-6 flex items-center justify-between animate-fade-in">
           <p className="text-gray-600">
             <span className="font-semibold text-gray-900">
-              {filteredData.length}
+              {data.length}
             </span>{" "}
-            {filteredData.length === 1 ? "partner" : "partners"} found
+            {data.length === 1 ? "partner" : "partners"} found
           </p>
           {searchTerm && (
             <button
-              onClick={() => setSearchTerm("")}
+              onClick={handleClearSearch}
               className="text-sm text-gray-600 hover:text-gray-900 underline transition-colors"
             >
               Clear search
@@ -201,7 +234,7 @@ const PartnerProfiles = () => {
         </div>
 
         {/* Partner Cards Grid */}
-        {filteredData.length === 0 ? (
+        {data.length === 0 ? (
           <div className="text-center py-20 animate-fade-in">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-6">
               <Search size={32} className="text-gray-400" />
@@ -213,7 +246,7 @@ const PartnerProfiles = () => {
               Try adjusting your search terms
             </p>
             <button
-              onClick={() => setSearchTerm("")}
+              onClick={handleClearSearch}
               className="px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               Clear Search
@@ -221,7 +254,7 @@ const PartnerProfiles = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 animate-stagger">
-            {filteredData.map((partner, index) => (
+            {data.map((partner, index) => (
               <div
                 key={partner._id}
                 style={{

@@ -18,6 +18,7 @@ import {
   Zap,
   Target,
   Globe,
+  LocateIcon,
 } from "lucide-react";
 import { useLoaderData, useNavigate} from "react-router";
 import { AuthContext } from "../Auth/AuthContext";
@@ -39,15 +40,6 @@ const ProfileDetails = () => {
     }
     setIsVisible(true);
   }, [user, navigate]);
-
-  const handleBookSession = () => {
-    setShowBooking(true);
-  };
-
-  const handleSendMessage = () => {
-    // Implement messaging functionality
-    alert("Message feature coming soon!");
-  };
 
   const handleFavorite = () => {
     setIsFavorited(!isFavorited);
@@ -93,7 +85,7 @@ const ProfileDetails = () => {
 
   if (!data?.success || !partner) {
     return (
-      <div className="min-h-screen mt-20 bg-linear-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-50 flex items-center justify-center">
         <div className="text-center">
           <BookOpen size={64} className="mx-auto mb-4 text-gray-400" />
           <h2 className="text-2xl font-bold text-gray-900 mb-2">
@@ -114,50 +106,49 @@ const ProfileDetails = () => {
   }
 
   return (
-    <div className="min-h-screen mt-40 bg-linear-to-br from-slate-50 via-white to-slate-50">
-    {/* Animated Background */}
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
-      <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float-delayed"></div>
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-pulse"></div>
-    </div>
+    <div className="min-h-screen pt-10 mt-20 bg-linear-to-br from-slate-50 via-white to-slate-50">
+      {/* Animated Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-purple-200/30 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl animate-pulse"></div>
+      </div>
 
-    {/* Glassmorphic Navigation Bar */}
-    <div className="sticky top-0 z-50 mx-auto max-w-5xl mt-6 px-4">
-      <div className="rounded-full bg-white/25 backdrop-blur-xl border border-white/30 shadow-lg px-6 py-3 flex items-center justify-between transition-all duration-300 hover:bg-white/30">
-        <button
-          onClick={handleBack}
-          className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors group"
-        >
-          <ChevronLeft
-            size={24}
-            className="group-hover:-translate-x-1 transition-transform"
-          />
-          <span className="font-semibold">Back to Partners</span>
-        </button>
-
-        <div className="flex items-center gap-3">
+      {/* Glassmorphic Navigation Bar */}
+      <div className="sticky top-0 z-50 mx-auto max-w-5xl mt-6 px-4">
+        <div className="rounded-full bg-white/25 backdrop-blur-xl border border-white/30 shadow-lg px-6 py-3 flex items-center justify-between transition-all duration-300 hover:bg-white/30">
           <button
-            onClick={handleFavorite}
-            className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
-              isFavorited
-                ? "bg-red-100/60 text-red-600"
-                : "bg-white/40 text-gray-600 hover:bg-red-50 hover:text-red-600"
-            }`}
+            onClick={handleBack}
+            className="flex items-center gap-2 text-gray-700 hover:text-gray-900 transition-colors group"
           >
-            <Heart size={20} className={isFavorited ? "fill-current" : ""} />
+            <ChevronLeft
+              size={24}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
+            <span className="font-semibold">Back to Partners</span>
           </button>
 
-          <button
-            onClick={handleShare}
-            className="p-3 rounded-full bg-white/40 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover:scale-110"
-          >
-            <Share2 size={20} />
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={handleFavorite}
+              className={`p-3 rounded-full transition-all duration-300 hover:scale-110 ${
+                isFavorited
+                  ? "bg-red-100/60 text-red-600"
+                  : "bg-white/40 text-gray-600 hover:bg-red-50 hover:text-red-600"
+              }`}
+            >
+              <Heart size={20} className={isFavorited ? "fill-current" : ""} />
+            </button>
+
+            <button
+              onClick={handleShare}
+              className="p-3 rounded-full bg-white/40 text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover:scale-110"
+            >
+              <Share2 size={20} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
@@ -230,8 +221,8 @@ const ProfileDetails = () => {
                   </div>
 
                   <div className="flex items-center gap-3 text-gray-600">
-                    <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center">
-                      <Video size={20} className="text-purple-600" />
+                    <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                      <Video size={20} className="text-blue-600" />
                     </div>
                     <div>
                       <p className="text-xs text-gray-500 font-medium">
@@ -242,10 +233,23 @@ const ProfileDetails = () => {
                       </p>
                     </div>
                   </div>
+                  <div className="flex items-center gap-3 text-gray-600">
+                    <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+                      <LocateIcon size={20} className="text-blue-600" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 font-medium">
+                        Location
+                      </p>
+                      <p className="font-semibold text-gray-900">
+                        {partner.location}
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="flex items-center gap-3 text-gray-600">
-                    <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
-                      <Clock size={20} className="text-green-600" />
+                    <div className="w-auto h-10 bg-blue-50 rounded-xl px-2.5 flex items-center justify-center">
+                      <Clock size={20} className="text-blue-600" />
                     </div>
                     <div>
                       <p className="text-xs text-gray-500 font-medium">
@@ -256,24 +260,6 @@ const ProfileDetails = () => {
                       </p>
                     </div>
                   </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="space-y-3">
-                  <button
-                    onClick={handleBookSession}
-                    className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-blue-700 hover:to-purple-700 flex items-center justify-center gap-2"
-                  >
-                    <Calendar size={20} />
-                    Book Session
-                  </button>
-                  <button
-                    onClick={handleSendMessage}
-                    className="w-full bg-linear-to-r from-green-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all hover:from-green-700 hover:to-teal-700 flex items-center justify-center gap-2"
-                  >
-                    <MessageCircle size={20} />
-                    Send Message
-                  </button>
                 </div>
               </div>
             </div>
@@ -287,7 +273,7 @@ const ProfileDetails = () => {
               style={{ animation: "fadeInUp 0.8s ease-out 0.2s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-r from-gray-600 to-black rounded-xl flex items-center justify-center">
                   <Users size={24} className="text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">About Me</h2>
@@ -303,7 +289,7 @@ const ProfileDetails = () => {
               style={{ animation: "fadeInUp 0.8s ease-out 0.3s both" }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-linear-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-linear-to-r from-black to-gray-600 rounded-xl flex items-center justify-center">
                   <BookOpen size={24} className="text-white" />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900">
@@ -319,7 +305,7 @@ const ProfileDetails = () => {
                   {partner.subjects.map((subject, index) => (
                     <span
                       key={index}
-                      className="px-5 py-2.5 bg-linear-to-r from-blue-50 to-purple-50 text-blue-700 rounded-xl text-sm font-semibold border border-blue-100 hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      className="px-5 py-2.5 bg-linear-to-r from-gray-700 via-gray-900 to-black text-white rounded-xl text-sm font-bold border border-blue-100 hover:scale-105 transition-transform duration-300 cursor-pointer"
                     >
                       {subject}
                     </span>
@@ -349,7 +335,7 @@ const ProfileDetails = () => {
               className="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-1000 delay-300"
               style={{ animation: "fadeInUp 0.8s ease-out 0.4s both" }}
             >
-              <div className="bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-r from-gray-700 via-gray-900 to-black rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Zap size={32} className="opacity-80" />
                   <TrendingUp size={24} className="opacity-60" />
@@ -360,7 +346,7 @@ const ProfileDetails = () => {
                 </p>
               </div>
 
-              <div className="bg-linear-to-br from-purple-500 to-purple-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-r from-gray-700 via-gray-900 to-black rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Clock size={32} className="opacity-80" />
                   <CheckCircle size={24} className="opacity-60" />
@@ -373,7 +359,7 @@ const ProfileDetails = () => {
                 </p>
               </div>
 
-              <div className="bg-linear-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
+              <div className="bg-linear-to-r from-gray-700 via-gray-900 to-black rounded-2xl p-6 text-white shadow-lg hover:scale-105 transition-transform duration-300">
                 <div className="flex items-center justify-between mb-2">
                   <Users size={32} className="opacity-80" />
                   <Target size={24} className="opacity-60" />
@@ -427,7 +413,7 @@ const ProfileDetails = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-linear-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-linear-to-r from-gray-700 via-gray-900 to-black rounded-xl flex items-center justify-center">
                       <Globe size={20} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">
@@ -448,7 +434,7 @@ const ProfileDetails = () => {
 
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 bg-linear-to-br from-pink-500 to-red-600 rounded-xl flex items-center justify-center">
+                    <div className="w-10 h-10 bg-linear-to-r from-gray-700 via-gray-900 to-black rounded-xl flex items-center justify-center">
                       <Mail size={20} className="text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">Contact</h3>
