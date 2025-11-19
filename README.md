@@ -107,6 +107,50 @@ The platform focuses on **clean UX**, **frictionless routing**, and **interactiv
 
 ---
 
+## 🚀 **Quick Setup for StudyMate**
+
+### Prerequisites
+
+- Node.js (v18+), Git, MongoDB Atlas account, Firebase project.
+
+### 1. Clone & Install
+
+```bash
+git clone <repo-url> && cd studymate
+```
+
+### 2. Backend (server/)
+
+```bash
+cd server && npm install
+# Create .env: MONGODB_URI=..., FIREBASE_SERVICE_ACCOUNT_PATH=...
+npm run dev  # Runs on localhost:5000
+```
+
+### 3. Frontend (client/)
+
+```bash
+cd ../client && npm install
+# Create .env: VITE_FIREBASE_API_KEY=..., VITE_API_URL=http://localhost:5000/api
+npm run dev  # Runs on localhost:5173
+```
+
+### 4. Test
+
+- Open http://localhost:5173
+- Auth (email/Google), create profile, find partners, send requests.
+
+### Troubleshooting
+
+- CORS: Add backend middleware for localhost:5173.
+- Env errors: Verify keys/paths.
+- DB: Whitelist IP in Atlas.
+
+Deploy: Build frontend (`npm run build`), upload to Netlify; backend to Vercel. Email dev for help!
+Package: Run (`npm i`) in your CMD to install all the needed packages. 
+
+---
+
 ## 👩‍💻 **Developer Info**
 
 **Name:** Kazi Fabiha Golam Liya
