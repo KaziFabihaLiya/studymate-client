@@ -87,15 +87,13 @@ The platform focuses on **clean UX**, **frictionless routing**, and **interactiv
 
 ## 🖼️ **Screenshots**
 
-> Replace with your actual project screenshots.
-
 ```
-![Home](assets/home.png)
-![Login](assets/login.png)
-![Create Profile](assets/create.png)
-![Find Partners](assets/Find_partner.png)
-![Details Page](assets/details.png)
-![My Connections](assets/connections.png)
+|![Home](assets/home.png)|
+|![Login](assets/login.png)|
+|![Create Profile](assets/create.png)|
+|![Find Partners](assets/Find_partner.png)|
+|![Details Page](assets/details.png)|
+|![My Connections](assets/connections.png)|
 ```
 
 ---
