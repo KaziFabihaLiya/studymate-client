@@ -154,7 +154,7 @@ Package: Run (`npm i`) in your CMD to install all the needed packages.
 ## 👩‍💻 **Developer Info**
 
 **Name:** Kazi Fabiha Golam Liya
-**Email:** [kazifabiha20@gmail.com](mailto:kazifabiha20@gmail.com)
+**Email:** [kazifabihaliya@gmail.com](mailto:kazifabihaliya@gmail.com)
 
 ---
 
