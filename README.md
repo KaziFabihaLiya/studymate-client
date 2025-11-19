@@ -87,22 +87,22 @@ The platform focuses on **clean UX**, **frictionless routing**, and **interactiv
 
 ## 🖼️ **Screenshots**
 
-###Home
+### Home
 ![Home](assets/home.png)
 
-###Login
+### Login
 ![Login](assets/login.png)
 
-###Create Profile
+### Create Profile
 ![Create Profile](assets/create.png)
 
-###Find Partner
+### Find Partner
 ![Find Partners](assets/Find_partner.png)
 
-###Details Page
+### Details Page
 ![Details Page](assets/details.png)
 
-###My Connection Page
+### My Connection Page
 ![My Connections](assets/connections.png)
 
 ---
