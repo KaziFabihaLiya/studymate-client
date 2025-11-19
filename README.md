@@ -1,79 +1,112 @@
-# 🧠 StudyMate — Find Your Perfect Study Partner
+# 🧠 **StudyMate — Find Your Perfect Study Partner**
 
-### 🌐 Live Site URL
-
-[👉 Visit StudyMate Live](https://studymate-auth-firebase.web.app/)
-
----
-
-## 📘 Project Overview
-
-**StudyMate** is a full-stack MERN web platform that helps students connect with compatible study partners based on subjects, learning styles, and availability.  
-It transforms the traditional study experience into an interactive, collaborative, and engaging journey through smart matchmaking and personalized learning connections.
+<p align="left">
+  <img src="https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+  <img src="https://img.shields.io/badge/Node.js-Express-43853D?style=for-the-badge&logo=node.js&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MongoDB-Atlas-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Firebase-Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Netlify-Client-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Vercel-Server-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+</p>
 
 ---
 
-## 🚀 Key Features
+## 🌐 **Live Site**
 
-- 🔐 **Firebase Authentication** – Secure login, registration, and Google sign-in support.
-- 🧑‍🤝‍🧑 **Find Study Partners** – Browse and filter study profiles by subject or experience level, with dynamic search and sort.
-- ✏️ **Create & Manage Profiles** – Logged-in users can create, update, and delete their own study partner profiles.
-- 💬 **Partner Requests System** – Send connection requests that auto-increment partner counts and store in MongoDB.
-- 🌓 **Dark/Light Theme & Responsive Design** – Adaptive UI with a clean black–gray–white gradient theme across all devices.
-- ⚙️ **SweetAlert2 & React-Hot-Toast** – Elegant success/error notifications without default browser alerts.
-- 📊 **MongoDB CRUD Operations** – Seamless create, read, update, and delete features via RESTful APIs.
-- ⚡ **Error-Free Navigation** – Route-based rendering with persistent navbar/footer; reloading on private routes keeps users logged in.
-- 🎨 **Creative 404 Page** – Custom animated error page with navigation options.
+### 🔗 Visit StudyMate → **[https://studymate-auth-firebase.web.app/](https://studymate-auth-firebase.web.app/)**
 
 ---
 
-## 🧩 Tech Stack
+## 📘 **Project Overview**
 
-### 💻 Frontend
-
-- **React 19**, **Vite**, **TailwindCSS**, **DaisyUI**
-- **Lucide-React** for icons
-- **React Router 7** for client-side routing
-- **React Hot Toast** & **SweetAlert2** for notifications
-- **Three.js** for light 3D visual elements
-
-### ⚙️ Backend
-
-- **Node.js**, **Express.js**
-- **MongoDB & Mongoose**
-- **Firebase Admin SDK** for authentication management
+**StudyMate** is a full-stack MERN platform built to help students connect with ideal study partners based on subjects, interests, experience level, and availability.
+The platform focuses on **clean UX**, **frictionless routing**, and **interactive collaboration**—making the study experience smarter and more engaging.
 
 ---
 
-## 🔧 Core Functionalities
+## 🚀 **Key Features**
 
-- **Authentication:** Firebase-based login/registration with Google OAuth.
-- **Partner Profiles:** Create, view, update, and delete personal profiles.
-- **Find Partners Page:** Sort and search functionality for study partners.
-- **My Connections:** View and manage sent partner requests with update/delete.
-- **Details Page:** Shows full profile info with “Send Partner Request” button.
-
----
-
-## 🛠️ Packages Used
-- firebase, lucide-react, react, react-dom, react-hot-toast,
-sweetalert2, three, tailwindcss, daisyui, react-router, vite
+- 🔐 **Firebase Authentication** – Email/password + Google OAuth
+- 🔍 **Find Study Partners** – Search & sort profiles dynamically
+- ✏️ **Create & Manage Profiles** – CRUD operations with real-time UI updates
+- 🤝 **Partner Request System** – Auto-increments partner count using MongoDB `$inc`
+- 🌓 **Dark/Light Theme** – Smooth aesthetic toggle
+- 📱 **Responsive Layout** – Optimized for mobile, tablet, and desktop
+- ⚠️ **Custom 404 Page** – Minimal, animated, user-friendly
+- 🎛️ **SweetAlert2 & React Hot Toast** – Clean notifications without default alerts
+- 🔁 **Persistent Authentication** – Reloading private routes keeps user logged in
 
 ---
 
-## 🌍 Deployment
+## 🧩 **Tech Stack**
 
-- **Client:** Hosted on **Netlify** → [Live Site](https://studymate-auth-firebase.web.app/)  
-- **Server:** Hosted on **Vercel** → [API Endpoint](https://study-mate-server-six.vercel.app/)
+### **Frontend**
+
+- React 19, Vite
+- TailwindCSS + DaisyUI
+- Lucide-React Icons
+- React Router 7
+- React Hot Toast & SweetAlert2
+- Three.js (light 3D visuals)
+
+### **Backend**
+
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- Firebase Admin SDK
 
 ---
 
-## 👩‍💻 Developer Info
+## 🔧 **Core Functionalities**
 
-**Developer:** Kazi Fabiha Golam Liya  
-**Email:** kazifabiha20@gmail.com  
-**Project Type:** Full-Stack MERN Web App  
+- **User Authentication** (Firebase + Google OAuth)
+- **Create Profile** (name, subject, mode, experience, etc.)
+- **Find Partners** (search + sort)
+- **Partner Details Page** (with request button)
+- **My Connections** (update/delete sent requests)
+- **Partner Count Increment** using `$inc` operator
 
 ---
 
-> _StudyMate — Learn better together._  
+## 🛠️ **Packages Used**
+
+`firebase`, `lucide-react`, `react`, `react-dom`, `react-hot-toast`,
+`sweetalert2`, `three`, `tailwindcss`, `daisyui`, `react-router`, `vite`
+
+---
+
+## 🌍 **Deployment**
+
+- **Client:** Netlify
+  🔗 [https://studymate-auth-firebase.web.app/](https://studymate-auth-firebase.web.app/)
+- **Server:** Vercel
+  🔗 [https://study-mate-server-six.vercel.app/](https://study-mate-server-six.vercel.app/)
+
+---
+
+## 🖼️ **Screenshots**
+
+> Replace with your actual project screenshots.
+
+```
+![Home](./assets/home.png)
+![Login](./assets/login.png)
+![Create Profile](./assets/create.png)
+![Find Partners](./assets/Find_partner.png)
+![Details Page](./assets/details.png)
+![My Connections](./assets/connections.png)
+```
+
+---
+
+## 👩‍💻 **Developer Info**
+
+**Name:** Kazi Fabiha Golam Liya
+**Email:** [kazifabiha20@gmail.com](mailto:kazifabiha20@gmail.com)
+
+---
+
+### _“StudyMate — Learn better together.”_
+
+---
